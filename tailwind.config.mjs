@@ -53,7 +53,7 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Source Serif 4 Variable"', '"Source Serif 4"', '"Source Serif Pro"', "Georgia", "serif"],
+        display: ['"Source Serif 4"', '"Source Serif Pro"', "Georgia", "serif"],
         sans: [
           "Inter",
           "ui-sans-serif",
@@ -119,8 +119,8 @@ export default {
             fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
             fontSize: "1rem",
             lineHeight: "1.65",
-            h1: { fontFamily: '"Source Serif 4 Variable", "Source Serif 4", serif', fontWeight: "400" },
-            h2: { fontFamily: '"Source Serif 4 Variable", "Source Serif 4", serif', fontWeight: "400" },
+            h1: { fontFamily: '"Source Serif 4", "Source Serif Pro", Georgia, serif', fontWeight: "400" },
+            h2: { fontFamily: '"Source Serif 4", "Source Serif Pro", Georgia, serif', fontWeight: "400" },
             h3: { fontFamily: "Inter, sans-serif", fontWeight: "500", fontSize: "1.25rem" },
             h4: { fontFamily: "Inter, sans-serif", fontWeight: "500", fontSize: "1.0625rem" },
             a: { textUnderlineOffset: "3px", textDecorationThickness: "1px" },
