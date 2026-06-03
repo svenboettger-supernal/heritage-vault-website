@@ -22,22 +22,22 @@ const trustItems = [
   <ContinuousWave tone="on-dark" />
 
   <Container class="relative z-10 py-24 md:py-32 lg:py-40">
-    <div class="max-w-[68rem]">
-      <p class="section-eyebrow">Stewardship, automated</p>
+    <div class="mx-auto max-w-[60rem] text-center flex flex-col items-center">
+      <p class="section-eyebrow text-center">Stewardship, automated</p>
 
       <h1
         id="hero-title"
-        class="font-display font-normal text-balance leading-[1.04] tracking-[-0.01em] text-ink-on-dark text-[clamp(3rem,7.6vw,5.75rem)]"
+        class="font-display font-normal text-balance leading-[1.04] tracking-[-0.01em] text-ink-on-dark text-[clamp(2.75rem,7vw,5.5rem)]"
         style='font-variation-settings: "opsz" 144;'
       >
         The estate-planning platform built by the firm that wrote the playbook.
       </h1>
 
-      <p class="mt-8 max-w-[44rem] text-[clamp(1.0625rem,1.35vw,1.25rem)] leading-[1.55] text-ink-muted-on-dark text-pretty">
+      <p class="mt-8 max-w-[42rem] text-[clamp(1rem,1.25vw,1.1875rem)] leading-[1.6] text-ink-muted-on-dark text-pretty">
         Heritage Vault collapses 20 to 40 hours of manual estate-plan production into under two. Built for the firms that serve ultra-high-net-worth families.
       </p>
 
-      <div class="mt-12 flex flex-wrap items-center gap-4">
+      <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
         <Button href={`${base}/request-access/`} variant="on-dark" size="lg" arrow>
           Request access
         </Button>
@@ -46,8 +46,8 @@ const trustItems = [
         </Button>
       </div>
 
-      <div class="mt-16 md:mt-20 pt-8 border-t border-rule-dark">
-        <TrustBar items={trustItems} onDark align="left" />
+      <div class="mt-16 md:mt-20 pt-8 border-t border-rule-dark w-full max-w-[60rem]">
+        <TrustBar items={trustItems} onDark align="center" />
       </div>
     </div>
   </Container>
