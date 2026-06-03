@@ -16,33 +16,35 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     style="background-image: radial-gradient(hsl(44 36% 93%) 1px, transparent 1px); background-size: 28px 28px;"
   ></div>
 
-  <Container width="wide" class="relative z-10 py-24 md:py-36">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
-      <div class="lg:col-span-8">
-        <p class="section-eyebrow">For partner firms</p>
+  <Container width="default" class="relative z-10 py-24 md:py-36">
+    {/* Single-column layout — heading + body + CTAs flow together, no orphaned button at the viewport edge. */}
+    <div class="max-w-[56rem]">
+      <p class="section-eyebrow">For partner firms</p>
 
-        <h2
-          id="closing-cta-title"
-          class="font-display font-normal text-balance leading-[1.05] tracking-[-0.005em] text-ink-on-dark text-[clamp(2.5rem,5.6vw,4.5rem)]"
-          style='font-variation-settings: "opsz" 144;'
-        >
-          Join the firms that plan for <em class="italic font-normal text-[hsl(44_36%_96%)]">every tomorrow.</em>
-        </h2>
+      <h2
+        id="closing-cta-title"
+        class="font-display font-normal text-balance leading-[1.05] tracking-[-0.005em] text-ink-on-dark text-[clamp(2.5rem,5.6vw,4.5rem)] mt-2"
+        style='font-variation-settings: "opsz" 60;'
+      >
+        Join the firms that plan for <em class="italic font-normal text-[hsl(44_36%_96%)]">every tomorrow.</em>
+      </h2>
 
-        <p class="mt-8 max-w-prose text-[1.0625rem] leading-[1.6] text-ink-muted-on-dark">
-          Heritage Vault is opening pilots with a small set of partner firms. A single named operations owner, real client documents, and a 30-day review cadence are the commitments. The platform brings the methodology.
-        </p>
-      </div>
+      <p class="mt-8 max-w-prose text-[1.0625rem] leading-[1.6] text-ink-muted-on-dark">
+        Heritage Vault is opening pilots with a small set of partner firms. A single named operations owner, real client documents, and a 30-day review cadence are the commitments. The platform brings the methodology.
+      </p>
 
-      <div class="lg:col-span-4 flex flex-col items-start lg:items-end gap-5">
+      <div class="mt-12 md:mt-14 flex flex-wrap items-center gap-x-8 gap-y-4">
         <Button href={`${base}/request-access/`} variant="on-dark" arrow>
           Request access
         </Button>
         <a
           href={`${base}/product/`}
-          class="no-underline text-[13px] text-ink-muted-on-dark hover:text-ink-on-dark transition-colors duration-fast"
+          class="no-underline text-[13px] font-medium tracking-[0.04em] text-ink-muted-on-dark hover:text-ink-on-dark transition-colors duration-fast inline-flex items-center gap-1.5"
         >
-          Or watch a 90-second tour →
+          Or watch a 90-second tour
+          <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M1 5h12M9 1l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
         </a>
       </div>
     </div>
