@@ -1,6 +1,10 @@
 ---
+/**
+ * NumbersStrip — four key claims, set in Source Serif 4 display.
+ * Reveals on scroll: each stat fades up from 8px with a staggered 80ms delay
+ * the first time the section enters the viewport. Honors prefers-reduced-motion.
+ */
 import Container from "@components/Container.astro";
-import Stat from "@components/Stat.astro";
 import Hairline from "@components/Hairline.astro";
 
 const stats = [
@@ -30,21 +34,85 @@ const stats = [
 <section class="bg-surface-card" aria-label="The numbers">
   <Hairline kind="bronze" />
 
-  <Container width="wide" class="py-20 md:py-24">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-10 lg:gap-12">
-      {stats.map((stat) => (
-        <Stat
-          value={stat.value}
-          label={stat.label}
-          detail={stat.detail}
-        />
+  <Container width="wide" class="py-24 md:py-32">
+    <div
+      class="numbers-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-10 lg:gap-12"
+      data-reveal-root
+    >
+      {stats.map((stat, idx) => (
+        <article
+          class="stat-card flex flex-col gap-3"
+          data-reveal-item
+          style={`--reveal-delay: ${idx * 80}ms;`}
+        >
+          <span
+            class="font-display text-surface-navy leading-none tracking-[-0.005em]"
+            style='font-variation-settings: "opsz" 60; font-size: clamp(2rem, 3.4vw, 2.75rem);'
+            data-figures="tabular"
+          >
+            {stat.value}
+          </span>
+          <span class="eyebrow text-[10.5px] mt-1">{stat.label}</span>
+          <p class="text-[13.5px] text-ink-muted leading-relaxed max-w-[22rem] mt-1">
+            {stat.detail}
+          </p>
+        </article>
       ))}
     </div>
-
-    <p class="mt-16 md:mt-20 text-[13px] text-ink-muted text-center max-w-prose mx-auto italic font-display leading-relaxed" style='font-variation-settings: "opsz" 14;'>
-      Numbers are static. The methodology is older than the website.
-    </p>
   </Container>
 
   <Hairline kind="bronze" />
 </section>
+
+<style>
+  /* Initial state, hidden until the IntersectionObserver flips the class. */
+  [data-reveal-item] {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+    transition:
+      opacity 600ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 600ms cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+  [data-reveal-item].is-revealed {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal-item] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Reveal the stats once when the strip enters the viewport.
+  const root = document.currentScript?.previousElementSibling
+    ?.previousElementSibling as HTMLElement | null;
+  const grid = (root ?? document).querySelector?.<HTMLElement>("[data-reveal-root]")
+    ?? document.querySelector<HTMLElement>("[data-reveal-root]");
+  if (grid && "IntersectionObserver" in window) {
+    const items = grid.querySelectorAll<HTMLElement>("[data-reveal-item]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            items.forEach((el) => el.classList.add("is-revealed"));
+            observer.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(grid);
+  } else if (grid) {
+    grid.querySelectorAll<HTMLElement>("[data-reveal-item]").forEach((el) =>
+      el.classList.add("is-revealed"),
+    );
+  }
+</script>

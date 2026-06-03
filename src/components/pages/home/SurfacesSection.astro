@@ -23,20 +23,8 @@ const pad = (n: number) => String(n).padStart(2, "0");
     class="mx-auto mb-16 md:mb-20"
   />
 
-  {/* Hero artifact behind the cards */}
   <div class="relative">
-    <div
-      class="hidden md:block absolute -top-6 right-0 w-[58%] -z-0 opacity-95 translate-x-6 lg:translate-x-12"
-      aria-hidden="true"
-    >
-      <PlaceholderScreenshot
-        label="Asset Schedule"
-        caption="One consolidated net-worth view"
-        aspect="landscape"
-      />
-    </div>
-
-    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7 mt-0 md:mt-24">
+    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7">
       {surfaces.slice(0, 2).map((surface, idx) => (
         <a
           href={`${base}/product/#${surface.slug}`}
