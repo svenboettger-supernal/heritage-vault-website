@@ -35,14 +35,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       </div>
 
       <div class="lg:col-span-4 flex flex-col items-start lg:items-end gap-5">
-        <Button href={`${base}/request-access/`} variant="ghost-on-dark" size="lg" arrow>
+        <Button href={`${base}/request-access/`} variant="on-dark" arrow>
           Request access
         </Button>
         <a
           href={`${base}/product/`}
-          class="text-[13px] text-ink-muted-on-dark hover:text-ink-on-dark border-b border-rule-dark hover:border-ink-on-dark transition-colors duration-fast"
+          class="no-underline text-[13px] text-ink-muted-on-dark hover:text-ink-on-dark transition-colors duration-fast"
         >
-          Or watch a 90-second tour
+          Or watch a 90-second tour →
         </a>
       </div>
     </div>

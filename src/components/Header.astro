@@ -31,8 +31,8 @@ const isActive = (href: string) => {
         <a
           href={item.href}
           class:list={[
-            "text-[12px] font-medium tracking-nav uppercase border-b-0 transition-colors duration-fast",
-            isActive(item.href) ? "text-surface-navy" : "text-ink hover:opacity-60",
+            "no-underline text-[12px] font-medium tracking-nav uppercase transition-opacity duration-fast",
+            isActive(item.href) ? "text-surface-navy opacity-100" : "text-ink hover:opacity-55",
           ]}
           aria-current={isActive(item.href) ? "page" : undefined}
         >
@@ -74,7 +74,7 @@ const isActive = (href: string) => {
         <a
           href={item.href}
           class:list={[
-            "py-3 text-[14px] font-medium uppercase tracking-nav border-b border-rule last:border-b-0 border-b-0",
+            "no-underline py-3 text-[14px] font-medium uppercase tracking-nav border-b border-rule last:border-b-0",
             isActive(item.href) ? "text-surface-navy" : "text-ink",
           ]}
         >
