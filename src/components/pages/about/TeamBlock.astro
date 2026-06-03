@@ -1,0 +1,62 @@
+---
+/**
+ * Team — company-focused, no individual bios. Per master plan default for
+ * brief §11.4: a 2-column block with a quiet contemporary office image
+ * left, three short company-shape paragraphs right. AI Employee is
+ * named Foreman (not Elliot).
+ */
+import Container from "@components/Container.astro";
+import RemoteImage from "@components/RemoteImage.astro";
+---
+
+<section class="bg-surface-muted" aria-labelledby="team-title">
+  <Container width="wide" class="py-20 md:py-28 lg:py-32">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <div class="lg:col-span-6">
+        <RemoteImage
+          photoId="photo-1497366216548-37526070297c"
+          alt="A quiet contemporary office interior"
+          aspect="landscape"
+          width={1200}
+        />
+      </div>
+
+      <div class="lg:col-span-6 lg:pl-2 xl:pl-6">
+        <p class="section-eyebrow">The team</p>
+        <h2
+          id="team-title"
+          class="font-display font-normal text-display-lg text-surface-navy leading-[1.08] tracking-[-0.005em] text-balance"
+          style='font-variation-settings: "opsz" 144;'
+        >
+          Built by the firm that built the method.
+        </h2>
+        <p class="mt-4 text-[1.125rem] md:text-[1.1875rem] leading-[1.55] text-ink-muted text-pretty max-w-[36rem]">
+          Heritage Vault is built by Heritage Strategies and its engineering partners.
+        </p>
+
+        <div class="mt-10 space-y-7 max-w-[38rem] text-[1.0625rem] leading-[1.65] text-ink">
+          <div>
+            <p class="eyebrow text-[11px] mb-2">Practice leadership</p>
+            <p>
+              Heritage Strategies LLC, the New York multi-family office, owns the methodology, the case-design pipeline, and the fiduciary posture of the product. The firm's partners advise the platform roadmap.
+            </p>
+          </div>
+
+          <div>
+            <p class="eyebrow text-[11px] mb-2">Engineering</p>
+            <p>
+              Heritage Vault is built by a small product team operating under the Heritage Strategies umbrella, with engineering partners from the Supernal Pod model.
+            </p>
+          </div>
+
+          <div>
+            <p class="eyebrow text-[11px] mb-2">AI Employee</p>
+            <p>
+              Foreman, the named AI presence inside Heritage Vault, was developed in partnership with Supernal AI.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

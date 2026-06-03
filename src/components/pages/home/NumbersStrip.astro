@@ -1,0 +1,50 @@
+---
+import Container from "@components/Container.astro";
+import Stat from "@components/Stat.astro";
+import Hairline from "@components/Hairline.astro";
+
+const stats = [
+  {
+    value: "20-40h → <2h",
+    label: "Time per client",
+    detail: "Manual estate-plan production, before and after Heritage Vault.",
+  },
+  {
+    value: "8",
+    label: "Document types ingested",
+    detail: "Trusts, wills, POAs, healthcare proxies, insurance, beneficiary designations, tax records.",
+  },
+  {
+    value: "15+ years",
+    label: "Methodology vintage",
+    detail: "Refined inside Heritage Strategies, the firm that originated the Approach Book.",
+  },
+  {
+    value: "100%",
+    label: "Source-linked values",
+    detail: "Every extracted value references the exact sentence in the source document.",
+  },
+];
+---
+
+<section class="bg-surface-card" aria-label="The numbers">
+  <Hairline kind="bronze" />
+
+  <Container width="wide" class="py-20 md:py-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-10 lg:gap-12">
+      {stats.map((stat) => (
+        <Stat
+          value={stat.value}
+          label={stat.label}
+          detail={stat.detail}
+        />
+      ))}
+    </div>
+
+    <p class="mt-16 md:mt-20 text-[13px] text-ink-muted text-center max-w-prose mx-auto italic font-display leading-relaxed" style='font-variation-settings: "opsz" 14;'>
+      Numbers are static. The methodology is older than the website.
+    </p>
+  </Container>
+
+  <Hairline kind="bronze" />
+</section>

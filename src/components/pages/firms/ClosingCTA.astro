@@ -1,0 +1,33 @@
+---
+/**
+ * Closing CTA on the surface-dark panel. Centered display headline, two CTAs.
+ */
+import Container from "@components/Container.astro";
+import Button from "@components/Button.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<section class="bg-surface-dark on-dark text-ink-on-dark py-24 md:py-32" aria-labelledby="closing-cta-heading">
+  <Container width="prose" class="text-center">
+    <h2
+      id="closing-cta-heading"
+      class="font-display font-normal text-display-lg leading-[1.05] tracking-[-0.005em] text-ink-on-dark text-balance"
+      style='font-variation-settings: "opsz" 144;'
+    >
+      Talk to the Heritage Vault team.
+    </h2>
+    <p class="mt-6 text-[1.0625rem] md:text-[1.125rem] leading-[1.6] text-ink-muted-on-dark text-pretty max-w-screen-narrow mx-auto">
+      We respond within one business day. Conversations are confidential by default.
+    </p>
+
+    <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
+      <Button href={`${base}/request-access/`} variant="on-dark" size="lg" arrow>
+        Request access
+      </Button>
+      <Button href="mailto:vault@getsupernal.ai" variant="ghost-on-dark" size="lg">
+        Email the team
+      </Button>
+    </div>
+  </Container>
+</section>

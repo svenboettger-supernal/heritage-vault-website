@@ -1,0 +1,133 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        surface: {
+          page: "hsl(var(--surface-page) / <alpha-value>)",
+          card: "hsl(var(--surface-card) / <alpha-value>)",
+          muted: "hsl(var(--surface-muted) / <alpha-value>)",
+          navy: "hsl(var(--surface-navy) / <alpha-value>)",
+          "navy-card": "hsl(var(--surface-navy-card) / <alpha-value>)",
+          dark: "hsl(var(--surface-dark) / <alpha-value>)",
+        },
+        ink: {
+          DEFAULT: "hsl(var(--text-ink) / <alpha-value>)",
+          muted: "hsl(var(--text-muted) / <alpha-value>)",
+          placeholder: "hsl(var(--text-placeholder) / <alpha-value>)",
+          "on-dark": "hsl(var(--text-on-dark) / <alpha-value>)",
+          "muted-on-dark": "hsl(var(--text-muted-on-dark) / <alpha-value>)",
+        },
+        bronze: {
+          DEFAULT: "hsl(var(--bronze))",
+          // bronze never has alpha — it's a structural hairline color, full opacity
+        },
+        state: {
+          blue: "hsl(var(--state-blue) / <alpha-value>)",
+        },
+        rule: {
+          DEFAULT: "hsl(var(--rule))",
+          dark: "hsl(var(--rule-dark))",
+        },
+        status: {
+          "success-bg": "hsl(var(--status-success-bg) / <alpha-value>)",
+          "success-fg": "hsl(var(--status-success-fg) / <alpha-value>)",
+          "success-br": "hsl(var(--status-success-br) / <alpha-value>)",
+          "warning-bg": "hsl(var(--status-warning-bg) / <alpha-value>)",
+          "warning-fg": "hsl(var(--status-warning-fg) / <alpha-value>)",
+          "warning-br": "hsl(var(--status-warning-br) / <alpha-value>)",
+          "info-bg": "hsl(var(--status-info-bg) / <alpha-value>)",
+          "info-fg": "hsl(var(--status-info-fg) / <alpha-value>)",
+          "info-br": "hsl(var(--status-info-br) / <alpha-value>)",
+        },
+        viz: {
+          0: "hsl(var(--viz-0) / <alpha-value>)",
+          1: "hsl(var(--viz-1) / <alpha-value>)",
+          2: "hsl(var(--viz-2) / <alpha-value>)",
+          3: "hsl(var(--viz-3) / <alpha-value>)",
+          4: "hsl(var(--viz-4) / <alpha-value>)",
+          5: "hsl(var(--viz-5) / <alpha-value>)",
+          6: "hsl(var(--viz-6) / <alpha-value>)",
+          7: "hsl(var(--viz-7) / <alpha-value>)",
+        },
+      },
+      fontFamily: {
+        display: ['"Source Serif 4 Variable"', '"Source Serif 4"', '"Source Serif Pro"', "Georgia", "serif"],
+        sans: [
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "Helvetica",
+          "Arial",
+          "sans-serif",
+        ],
+        mono: ['"JetBrains Mono"', "ui-monospace", "SFMono-Regular", "monospace"],
+      },
+      fontSize: {
+        "display-xl": ["clamp(3rem, 6vw, 5.5rem)", { lineHeight: "1.05", letterSpacing: "-0.005em" }],
+        "display-lg": ["clamp(2.5rem, 4.5vw, 3.75rem)", { lineHeight: "1.1", letterSpacing: "-0.005em" }],
+        "display-md": ["clamp(2rem, 3.5vw, 2.75rem)", { lineHeight: "1.15" }],
+        "display-sm": ["1.75rem", { lineHeight: "1.2" }],
+        eyebrow: ["0.75rem", { lineHeight: "1.3", letterSpacing: "0.22em" }],
+      },
+      maxWidth: {
+        "screen-narrow": "720px",
+        "screen-prose": "880px",
+        "screen-default": "1200px",
+        "screen-wide": "1440px",
+      },
+      letterSpacing: {
+        eyebrow: "0.22em",
+        nav: "0.18em",
+        button: "0.14em",
+      },
+      boxShadow: {
+        input: "0 1px 1px 0 rgba(27, 34, 48, 0.04)",
+        elevated: "0 8px 24px -8px rgba(27, 34, 48, 0.18)",
+        card: "0 1px 0 0 hsl(var(--rule))",
+      },
+      transitionDuration: {
+        fast: "150ms",
+        DEFAULT: "250ms",
+        slow: "400ms",
+      },
+      transitionTimingFunction: {
+        DEFAULT: "cubic-bezier(0.22, 0.61, 0.36, 1)",
+      },
+      borderRadius: {
+        DEFAULT: "4px",
+        sm: "2px",
+        md: "6px",
+        lg: "8px",
+      },
+      typography: () => ({
+        vault: {
+          css: {
+            "--tw-prose-body": "hsl(var(--text-ink))",
+            "--tw-prose-headings": "hsl(var(--surface-navy))",
+            "--tw-prose-links": "hsl(var(--surface-navy))",
+            "--tw-prose-bold": "hsl(var(--text-ink))",
+            "--tw-prose-quotes": "hsl(var(--text-ink))",
+            "--tw-prose-quote-borders": "hsl(var(--bronze))",
+            "--tw-prose-captions": "hsl(var(--text-muted))",
+            "--tw-prose-counters": "hsl(var(--text-muted))",
+            "--tw-prose-bullets": "hsl(var(--bronze))",
+            "--tw-prose-hr": "hsl(var(--rule))",
+            fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+            fontSize: "1rem",
+            lineHeight: "1.65",
+            h1: { fontFamily: '"Source Serif 4 Variable", "Source Serif 4", serif', fontWeight: "400" },
+            h2: { fontFamily: '"Source Serif 4 Variable", "Source Serif 4", serif', fontWeight: "400" },
+            h3: { fontFamily: "Inter, sans-serif", fontWeight: "500", fontSize: "1.25rem" },
+            h4: { fontFamily: "Inter, sans-serif", fontWeight: "500", fontSize: "1.0625rem" },
+            a: { textUnderlineOffset: "3px", textDecorationThickness: "1px" },
+          },
+        },
+      }),
+    },
+  },
+  plugins: [require("@tailwindcss/typography")],
+};

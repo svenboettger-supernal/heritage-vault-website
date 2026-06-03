@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+import Section from "@components/Section.astro";
+import FAQ from "@components/FAQ.astro";
+
+const homeFaqs = (
+  await getCollection("faqs", ({ data }) => data.page === "home")
+).sort((a, b) => a.data.order - b.data.order);
+
+const items = homeFaqs.map((f) => ({
+  question: f.data.question,
+  answer: f.data.answer,
+}));
+---
+
+<Section background="page" width="wide" padding="loose" id="faq">
+  <FAQ
+    layout="two-column"
+    eyebrow="Questions"
+    heading="Frequently asked."
+    subheading="The questions firms ask most often before a Heritage Vault pilot."
+    items={items}
+  />
+</Section>

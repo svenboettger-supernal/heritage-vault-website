@@ -1,0 +1,45 @@
+---
+/**
+ * Compliance contact CTA. Closes the page with the request-packet ask.
+ */
+import Container from "@components/Container.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+import Button from "@components/Button.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<section class="bg-surface-muted py-24 md:py-32" aria-labelledby="security-cta-title">
+  <Container width="default">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-16 items-center">
+      <div class="lg:col-span-7">
+        <SectionTitle
+          eyebrow="Compliance contact"
+          heading="Request the full security packet."
+          subheading="Available to qualified firms under NDA. Typical turnaround: one business day."
+        />
+      </div>
+
+      <div class="lg:col-span-5 lg:justify-self-end">
+        <div class="flex flex-col items-start gap-5">
+          <Button
+            href={`${base}/request-access/?intent=security`}
+            variant="primary"
+            size="lg"
+            arrow
+          >
+            Request the packet
+          </Button>
+          <p class="text-[14px] leading-relaxed text-ink-muted">
+            or email
+            <!-- placeholder: compliance@ address to be provisioned -->
+            <a
+              href="mailto:compliance@heritagevault.com"
+              class="text-surface-navy"
+            >compliance@heritagevault.com</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

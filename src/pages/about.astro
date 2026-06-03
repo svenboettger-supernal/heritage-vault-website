@@ -1,0 +1,33 @@
+---
+/**
+ * /about/ — Heritage Vault About page.
+ *
+ * Reads like the title page of a private bank's founding monograph:
+ * parchment editorial hero, a longer origin narrative with a pull quote,
+ * the gap-in-the-market argument, a calm methodology timeline, a
+ * company-focused team block (no individual bios per master plan), a
+ * quiet link-out to Heritage Strategies, and a CTA band.
+ */
+import Layout from "@layouts/Layout.astro";
+import Hero from "@components/pages/about/Hero.astro";
+import OriginStory from "@components/pages/about/OriginStory.astro";
+import WhyThisMatters from "@components/pages/about/WhyThisMatters.astro";
+import Timeline from "@components/pages/about/Timeline.astro";
+import TeamBlock from "@components/pages/about/TeamBlock.astro";
+import FirmLink from "@components/pages/about/FirmLink.astro";
+import CTABand from "@components/pages/about/CTABand.astro";
+---
+
+<Layout
+  title="About Heritage Vault"
+  description="Heritage Vault is the product of Heritage Strategies LLC, the multi-family office that has produced these plans by hand since 2009. The platform digitizes a methodology, not the other way around."
+  pathname="/about/"
+>
+  <Hero />
+  <OriginStory />
+  <WhyThisMatters />
+  <Timeline />
+  <TeamBlock />
+  <FirmLink />
+  <CTABand />
+</Layout>

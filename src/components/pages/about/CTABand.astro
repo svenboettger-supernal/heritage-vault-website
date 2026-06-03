@@ -1,0 +1,38 @@
+---
+/**
+ * CTA band — bg-surface-dark, Source Serif 4 display heading, single primary
+ * Button (on-dark variant) routing to /request-access/. One CTA per band,
+ * per brand voice rules.
+ */
+import Container from "@components/Container.astro";
+import Button from "@components/Button.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<section
+  class="bg-surface-dark text-ink-on-dark on-dark"
+  aria-labelledby="about-cta-title"
+>
+  <Container width="default" class="py-24 md:py-32 lg:py-36">
+    <div class="max-w-screen-prose">
+      <p class="section-eyebrow">Request access</p>
+      <h2
+        id="about-cta-title"
+        class="font-display font-normal text-display-lg text-ink-on-dark leading-[1.08] tracking-[-0.005em] text-balance"
+        style='font-variation-settings: "opsz" 144;'
+      >
+        Speak with the Heritage Vault team.
+      </h2>
+      <p class="mt-6 max-w-[36rem] text-[1.0625rem] md:text-[1.125rem] leading-[1.6] text-ink-muted-on-dark text-pretty">
+        Heritage Vault is opening to a small group of partner firms. If your practice serves UHNW families and you want to see the platform in your own document set, the team will arrange a walk-through.
+      </p>
+
+      <div class="mt-10">
+        <Button href={`${base}/request-access/`} variant="on-dark" size="lg" arrow>
+          Request access
+        </Button>
+      </div>
+    </div>
+  </Container>
+</section>

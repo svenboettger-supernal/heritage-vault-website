@@ -1,0 +1,46 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Hero from "@components/pages/home/Hero.astro";
+import RecognitionStrip from "@components/pages/home/RecognitionStrip.astro";
+import ProblemBlock from "@components/pages/home/ProblemBlock.astro";
+import SurfacesSection from "@components/pages/home/SurfacesSection.astro";
+import NumbersStrip from "@components/pages/home/NumbersStrip.astro";
+import AudienceTabs from "@components/pages/home/AudienceTabs.astro";
+import OriginEditorial from "@components/pages/home/OriginEditorial.astro";
+import Testimonials from "@components/pages/home/Testimonials.astro";
+import ClosingCta from "@components/pages/home/ClosingCta.astro";
+import HomeFaq from "@components/pages/home/HomeFaq.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Heritage Vault",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description:
+    "The estate-planning platform built by the firm that wrote the playbook. Twenty to forty hours of manual work per client, reduced to under two.",
+  publisher: {
+    "@type": "Organization",
+    name: "Heritage Strategies LLC",
+    url: "https://heritagesllc.com",
+  },
+};
+---
+
+<Layout
+  title="Heritage Vault. Estate planning, built by the firm that wrote the playbook."
+  description="Heritage Vault collapses 20 to 40 hours of manual estate-plan production into under two. Built for the firms that serve ultra-high-net-worth families."
+  pathname="/"
+  jsonLd={jsonLd}
+>
+  <Hero />
+  <RecognitionStrip />
+  <ProblemBlock />
+  <SurfacesSection />
+  <NumbersStrip />
+  <AudienceTabs />
+  <OriginEditorial />
+  <Testimonials />
+  <ClosingCta />
+  <HomeFaq />
+</Layout>

@@ -1,0 +1,37 @@
+---
+/**
+ * The signature serif-heading + sans-subheading + bronze-eyebrow lockup
+ * from the Heritage brand prompt §Typography.
+ */
+export interface Props {
+  eyebrow?: string;
+  heading: string;
+  subheading?: string;
+  align?: "left" | "center";
+  class?: string;
+  as?: "h1" | "h2";
+}
+
+const {
+  eyebrow,
+  heading,
+  subheading,
+  align = "left",
+  class: className = "",
+  as = "h2",
+} = Astro.props;
+
+const Tag = as as string;
+---
+
+<header
+  class:list={[
+    "section-title-block max-w-screen-prose",
+    align === "center" && "mx-auto text-center",
+    className,
+  ]}
+>
+  {eyebrow && <p class="section-eyebrow">{eyebrow}</p>}
+  <Tag class="section-heading text-balance">{heading}</Tag>
+  {subheading && <p class="section-subheading text-pretty">{subheading}</p>}
+</header>

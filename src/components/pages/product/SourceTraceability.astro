@@ -1,0 +1,142 @@
+---
+/**
+ * Source traceability — the differentiator. Lives on bg-surface-dark.
+ * LEFT: a synthetic UI snippet showing a value with a hover-popover linking to the source.
+ * RIGHT: the original document with the matched sentence underlined in bronze (1px line, not a fill).
+ *
+ * Both panels are plain HTML built from brand tokens, no inline SVG seal reconstruction,
+ * no vendor Tailwind colors.
+ */
+import Container from "@components/Container.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+---
+
+<section class="bg-surface-dark text-ink-on-dark on-dark py-24 md:py-36" aria-label="Source traceability">
+  <Container width="default">
+    <SectionTitle
+      eyebrow="Source traceability"
+      heading="Every value, traceable to the sentence it came from."
+      subheading="Click any extracted value. See the exact passage in the source document. Override if you need to. The audit log captures it all."
+    />
+
+    <div class="mt-16 md:mt-20 grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-10 items-stretch">
+      {/* LEFT — synthetic UI snippet with hover popover */}
+      <div class="lg:col-span-6">
+        <div class="h-full rounded-md border border-rule-dark bg-surface-navy-card shadow-elevated overflow-hidden">
+          {/* mock browser chrome */}
+          <div class="h-9 flex items-center px-4 gap-2 border-b border-rule-dark bg-[hsl(220_38%_16%)]">
+            <span aria-hidden="true" class="w-2.5 h-2.5 rounded-full bg-ink-muted-on-dark/40"></span>
+            <span aria-hidden="true" class="w-2.5 h-2.5 rounded-full bg-ink-muted-on-dark/40"></span>
+            <span aria-hidden="true" class="w-2.5 h-2.5 rounded-full bg-ink-muted-on-dark/40"></span>
+            <span class="ml-4 text-[11px] font-mono text-ink-muted-on-dark">vault.heritagestrategies.com / asset-schedule</span>
+          </div>
+
+          <div class="p-8 md:p-10">
+            <p class="eyebrow text-[hsl(35_26%_64%)] text-[11px]">Schedule A · Real property</p>
+            <h3 class="mt-3 font-display text-[22px] md:text-[24px] font-normal text-ink-on-dark" style='font-variation-settings: "opsz" 24;'>
+              Westport residence
+            </h3>
+
+            {/* Table row with the highlighted value + popover */}
+            <div class="mt-8 border-t border-rule-dark">
+              <div class="grid grid-cols-2 py-4 border-b border-rule-dark text-[14px]">
+                <span class="text-ink-muted-on-dark">Owner</span>
+                <span class="text-ink-on-dark text-right">Carter Family Trust (rev.)</span>
+              </div>
+              <div class="grid grid-cols-2 py-4 border-b border-rule-dark text-[14px]">
+                <span class="text-ink-muted-on-dark">Acquired</span>
+                <span class="text-ink-on-dark text-right" data-figures="tabular">1998-04-12</span>
+              </div>
+              <div class="relative grid grid-cols-2 py-4 border-b border-rule-dark text-[14px]">
+                <span class="text-ink-muted-on-dark">Fair market value</span>
+                <span class="flex items-center justify-end gap-2">
+                  <span
+                    class="inline-flex items-center font-mono text-[14px] text-ink-on-dark px-2 py-1 rounded-sm border border-bronze/70"
+                    data-figures="tabular"
+                  >
+                    $8,420,000
+                  </span>
+                </span>
+
+                {/* Popover, always-visible to communicate the behavior */}
+                <div
+                  class="absolute right-0 top-full mt-3 w-[300px] max-w-full z-10 rounded-md border border-rule-dark bg-[hsl(220_38%_16%)] shadow-elevated"
+                  role="note"
+                  aria-label="Source citation"
+                >
+                  <div class="px-4 py-3 border-b border-rule-dark flex items-center justify-between">
+                    <span class="font-mono text-[10px] tracking-[0.18em] uppercase text-[hsl(35_26%_64%)]">Source</span>
+                    <span class="font-mono text-[10px] text-ink-muted-on-dark">CARTER-TRUST-2019.PDF · P.14</span>
+                  </div>
+                  <p class="px-4 py-4 text-[13px] leading-[1.55] text-ink-muted-on-dark">
+                    "The real property located at 12 Compo Beach Road, Westport, CT 06880, valued at $8,420,000 as of 2024-12-31, is hereby contributed to the Trust."
+                  </p>
+                  <div class="px-4 py-3 border-t border-rule-dark flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.14em]">
+                    <span class="text-[hsl(35_26%_64%)]">Override</span>
+                    <span class="text-ink-muted-on-dark">Audit log entry created</span>
+                  </div>
+                  {/* Tail */}
+                  <span
+                    aria-hidden="true"
+                    class="absolute -top-[7px] right-10 w-3 h-3 rotate-45 bg-[hsl(220_38%_16%)] border-t border-l border-rule-dark"
+                  ></span>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 py-4 border-b border-rule-dark text-[14px]">
+                <span class="text-ink-muted-on-dark">Valuation basis</span>
+                <span class="text-ink-on-dark text-right">Independent appraisal</span>
+              </div>
+              <div class="grid grid-cols-2 py-4 text-[14px]">
+                <span class="text-ink-muted-on-dark">Valuation date</span>
+                <span class="text-ink-on-dark text-right" data-figures="tabular">2024-12-31</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="mt-4 font-mono text-[11px] tracking-[0.18em] uppercase text-ink-muted-on-dark">
+          Inside Heritage Vault
+        </p>
+      </div>
+
+      {/* RIGHT — original document with the matched sentence highlighted with a 1px bronze underline */}
+      <div class="lg:col-span-6">
+        <div class="h-full rounded-md border border-rule-dark bg-surface-card text-ink overflow-hidden shadow-elevated">
+          {/* "Document" chrome */}
+          <div class="px-6 py-3 flex items-center justify-between border-b border-rule">
+            <span class="font-mono text-[11px] tracking-[0.18em] uppercase text-bronze">Source document</span>
+            <span class="font-mono text-[10px] text-ink-muted" data-figures="tabular">CARTER-TRUST-2019.PDF · P.14</span>
+          </div>
+
+          {/* Document body — restrained editorial typesetting */}
+          <div class="px-8 md:px-12 py-10 md:py-12">
+            <p class="font-display text-[15px] leading-[1.65] text-ink mb-6" style='font-variation-settings: "opsz" 14;'>
+              <span class="font-mono text-[11px] tracking-[0.18em] uppercase text-bronze mr-3">Schedule A</span>
+              The Grantor hereby transfers, assigns, conveys, and delivers to the Trustee the property described below, to be held, administered, and distributed by the Trustee in accordance with the terms set forth in this Agreement.
+            </p>
+            <p class="font-display text-[15px] leading-[1.65] text-ink mb-6" style='font-variation-settings: "opsz" 14;'>
+              Said property shall include all rights, title, and interest of the Grantor, whether legal or equitable, in and to the following:
+            </p>
+            <p class="font-display text-[15px] leading-[1.65] text-ink" style='font-variation-settings: "opsz" 14;'>
+              <span class="relative inline">
+                The real property located at 12 Compo Beach Road, Westport, CT 06880, valued at $8,420,000 as of 2024-12-31, is hereby contributed to the Trust.
+                <span
+                  aria-hidden="true"
+                  class="absolute left-0 right-0 -bottom-0.5 h-px bg-bronze"
+                ></span>
+              </span>
+              The Grantor warrants good and marketable title, free of encumbrances except as disclosed in Exhibit B.
+            </p>
+
+            <div class="mt-10 pt-5 border-t border-rule flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.18em] text-ink-muted">
+              <span>Sentence matched</span>
+              <span class="text-bronze">1 of 1</span>
+            </div>
+          </div>
+        </div>
+        <p class="mt-4 font-mono text-[11px] tracking-[0.18em] uppercase text-ink-muted-on-dark">
+          Inside the source document
+        </p>
+      </div>
+    </div>
+  </Container>
+</section>

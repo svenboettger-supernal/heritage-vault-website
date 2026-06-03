@@ -1,0 +1,253 @@
+/* ---------- Font loading (must come before any other rule) ---------- */
+@import "@fontsource-variable/source-serif-4/index.css";
+@import "@fontsource-variable/source-serif-4/wght-italic.css";
+@import "@fontsource/inter/300.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Heritage Vault brand tokens (HSL components only) ---------- */
+:root {
+  /* surfaces */
+  --surface-page: 214 47% 97%;       /* #F5F8FC — cool near-white, default page */
+  --surface-card: 0 0% 100%;         /* #FFFFFF — cards on the page */
+  --surface-muted: 38 22% 95%;       /* #F2EDE3 — tinted secondary surface */
+  --surface-navy: 220 38% 19%;       /* #1E2A44 — nav, contrast panel */
+  --surface-navy-card: 220 35% 22%;  /* card inside navy panel */
+  --surface-dark: 220 44% 11%;       /* #0F1626 — deepest hero panel */
+
+  /* text */
+  --text-ink: 218 27% 14%;           /* #1B2230 — body on ivory */
+  --text-muted: 220 9% 47%;          /* #6B7280 — metadata */
+  --text-placeholder: 220 9% 60%;
+  --text-on-dark: 44 36% 93%;        /* #F4F0E6 — body on navy, warm cream */
+  --text-muted-on-dark: 220 9% 67%;
+
+  /* structural */
+  --bronze: 35 26% 43%;              /* #8C7351 — 1px hairlines only, never a fill */
+  --state-blue: 214 50% 34%;         /* #2C5282 — focus / active / info ONLY */
+  --rule: 38 22% 88%;                /* #E2DCD0 — warm hairline on ivory */
+  --rule-dark: 218 27% 28%;          /* hairline on navy */
+
+  /* status (app mode only) */
+  --status-success-bg: 150 30% 94%;
+  --status-success-fg: 150 50% 22%;
+  --status-success-br: 150 30% 70%;
+  --status-warning-bg: 46 50% 92%;
+  --status-warning-fg: 46 60% 24%;
+  --status-warning-br: 46 50% 70%;
+  --status-info-bg: 214 50% 94%;
+  --status-info-fg: 214 50% 28%;
+  --status-info-br: 214 50% 70%;
+
+  /* viz palette (no red, no orange) */
+  --viz-0: 220 38% 35%;
+  --viz-1: 35 26% 55%;
+  --viz-2: 140 18% 38%;
+  --viz-3: 295 16% 38%;
+  --viz-4: 50 28% 64%;
+  --viz-5: 210 32% 50%;
+  --viz-6: 340 18% 38%;
+  --viz-7: 220 6% 55%;
+}
+
+/* ---------- Base reset ---------- */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    color-scheme: light;
+  }
+
+  body {
+    background-color: hsl(var(--surface-page));
+    color: hsl(var(--text-ink));
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+
+  /* Display sizes — Source Serif 4, opsz 60+ */
+  .font-display,
+  .display h1,
+  .display h2 {
+    font-family: "Source Serif 4 Variable", "Source Serif 4", "Source Serif Pro", Georgia, serif;
+    font-weight: 400;
+    font-variation-settings: "opsz" 60;
+    letter-spacing: -0.005em;
+  }
+
+  /* Serif body (rare — used for editorial pull quotes) */
+  .serif-body {
+    font-family: "Source Serif 4 Variable", "Source Serif 4", Georgia, serif;
+    font-variation-settings: "opsz" 14;
+  }
+
+  /* Tabular figures in any dense data */
+  table,
+  .figure,
+  .amount,
+  .position,
+  .statement,
+  [data-figures="tabular"],
+  pre,
+  code,
+  kbd {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1, "kern" 1;
+  }
+
+  /* Focus ring — Reserved Blue, the only blue in the system */
+  :focus-visible {
+    outline: 2px solid hsl(var(--state-blue));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .wave path { animation: none !important; }
+  }
+
+  /* Selection */
+  ::selection {
+    background: hsl(var(--surface-navy));
+    color: hsl(var(--text-on-dark));
+  }
+
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Anchor defaults — navy on ivory, hairline-underline */
+  a {
+    color: hsl(var(--surface-navy));
+    text-decoration: none;
+    border-bottom: 1px solid hsl(var(--rule));
+    transition: border-color 200ms ease-out, color 200ms ease-out;
+  }
+  a:hover {
+    border-bottom-color: hsl(var(--surface-navy));
+  }
+  /* But don't underline buttons or logo lockups */
+  a.no-underline,
+  a.btn,
+  a:has(> img) {
+    border-bottom: none;
+  }
+
+  .on-dark {
+    color: hsl(var(--text-on-dark));
+  }
+  .on-dark a {
+    color: hsl(var(--text-on-dark));
+    border-bottom-color: hsl(var(--rule-dark));
+  }
+  .on-dark a:hover {
+    border-bottom-color: hsl(var(--text-on-dark));
+  }
+}
+
+@layer components {
+  /* Signature heading-subheading pattern */
+  .section-title-block { display: block; }
+  .section-eyebrow {
+    font-family: Inter, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: hsl(var(--bronze));
+    text-transform: uppercase;
+    margin: 0 0 1.5rem 0;
+  }
+  .on-dark .section-eyebrow {
+    color: hsl(35 26% 64%); /* bronze lifted for AA on dark */
+  }
+  .section-heading {
+    font-family: "Source Serif 4 Variable", "Source Serif 4", serif;
+    font-variation-settings: "opsz" 144;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: hsl(var(--surface-navy));
+    margin: 0 0 0.75rem 0;
+    letter-spacing: -0.005em;
+  }
+  .on-dark .section-heading { color: hsl(var(--text-on-dark)); }
+  .section-subheading {
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+    line-height: 1.5;
+    color: hsl(var(--text-muted));
+    margin: 0;
+  }
+  .on-dark .section-subheading { color: hsl(var(--text-muted-on-dark)); }
+
+  /* Bronze 1px hairline */
+  .hairline-bronze {
+    height: 1px;
+    background: hsl(var(--bronze));
+    opacity: 0.45;
+    width: 100%;
+  }
+
+  /* Warm rule (internal section divider) */
+  .rule {
+    height: 1px;
+    background: hsl(var(--rule));
+    width: 100%;
+  }
+  .on-dark .rule { background: hsl(var(--rule-dark)); }
+
+  /* Eyebrow utility */
+  .eyebrow {
+    font-family: Inter, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: hsl(var(--bronze));
+    text-transform: uppercase;
+  }
+  .on-dark .eyebrow {
+    color: hsl(35 26% 64%);
+  }
+
+  /* Card surface */
+  .card-surface {
+    background: hsl(var(--surface-card));
+    border: 1px solid hsl(var(--rule));
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .border-rule { border-color: hsl(var(--rule)); }
+  .border-rule-dark { border-color: hsl(var(--rule-dark)); }
+}

@@ -1,0 +1,26 @@
+---
+/**
+ * Quiet "where this came from" image block. Architectural facade detail,
+ * restrained. One quiet sentence centered below.
+ */
+import Container from "@components/Container.astro";
+import RemoteImage from "@components/RemoteImage.astro";
+---
+
+<section class="bg-surface-page py-24 md:py-32" aria-label="Origin">
+  <Container width="default">
+    <div class="max-w-screen-default mx-auto">
+      <RemoteImage
+        photoId="photo-1556157382-97eda2d62296"
+        alt="Architectural facade detail, restrained"
+        aspect="wide"
+      />
+    </div>
+    <p
+      class="mt-10 md:mt-12 max-w-screen-prose mx-auto text-center font-display text-[20px] md:text-[22px] leading-[1.5] text-surface-navy text-pretty"
+      style='font-variation-settings: "opsz" 24;'
+    >
+      Heritage Vault inherits the security posture of a fiduciary firm, not a startup.
+    </p>
+  </Container>
+</section>

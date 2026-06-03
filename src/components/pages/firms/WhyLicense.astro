@@ -1,0 +1,109 @@
+---
+/**
+ * The "why a firm licenses Heritage Vault" block, three full-width sections
+ * stacked, each with an alternating left-right rhythm. Per brief §7.3.
+ */
+import Container from "@components/Container.astro";
+import PlaceholderScreenshot from "@components/PlaceholderScreenshot.astro";
+
+const blocks = [
+  {
+    eyebrow: "Block 01",
+    heading: "Heritage-grade output, every time.",
+    paragraphs: [
+      "Two analysts at the same firm should produce the same plan. Today they do not. One analyst formats Schedule A differently. Another builds the Flow Diagram in a deck template that nobody else has. The client deliverable depends on which person assembled it.",
+      "Heritage Vault removes that variability. The five surfaces are fixed. The data model is fixed. Every value is source-linked back to the document it came from. A junior producer and a twenty-year partner draft the same surface, against the same structure.",
+      "What lands in front of the family carries the firm, not the individual who happened to be staffed on the file.",
+    ],
+    screenshot: {
+      label: "Asset Schedule consistency view",
+      caption: "The same surface, no matter which analyst built it",
+    },
+    layout: "text-left",
+  },
+  {
+    eyebrow: "Block 02",
+    heading: "Hours instead of weeks.",
+    paragraphs: [
+      "Twenty to forty hours of manual estate-plan production, reduced to under two. The Approach Book that took two weeks to assemble in spreadsheets and PowerPoint is on screen Wednesday morning, after a Monday upload.",
+      "The economics change. A firm that capped at twelve UHNW engagements per producer per year is not capped at twelve. The bottleneck was never the advisor's judgment, it was the manual workflow underneath. Heritage Vault removes the workflow, the judgment stays where it should.",
+      "More clients per producer, with the same level of care. No expansion of the back office, no new headcount to scale the practice.",
+    ],
+    screenshot: {
+      label: "Workflow timeline",
+      caption: "Upload Monday, deliver Wednesday",
+    },
+    layout: "text-right",
+  },
+  {
+    eyebrow: "Block 03",
+    heading: "A deliverable your clients can navigate.",
+    paragraphs: [
+      "The static PDF an HNW family receives today is the end of the conversation. Print it, sign it, file it. Heritage Vault gives a firm a different artifact.",
+      "The Flow Diagram is interactive. The Estate Distribution Chart models scenarios in real time, in front of the family. A producer can change a beneficiary, shift a generation, model a charitable remainder, and the chart redraws while the family watches.",
+      "Optional, the family logs in to a secure view of their own plan after the meeting. The firm's brand on every screen, Heritage Vault invisible behind it.",
+    ],
+    screenshot: {
+      label: "Interactive estate distribution chart",
+      caption: "Scenarios in real time, in front of the family",
+    },
+    layout: "text-left",
+  },
+];
+---
+
+<section class="bg-surface-page py-24 md:py-32" aria-label="Why a firm licenses Heritage Vault">
+  <Container>
+    <div class="space-y-28 md:space-y-36">
+      {blocks.map((block) => (
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-16 items-center">
+          {block.layout === "text-left" ? (
+            <>
+              <div class="lg:col-span-5 lg:col-start-1">
+                <p class="section-eyebrow">{block.eyebrow}</p>
+                <h2
+                  class="font-display font-normal text-display-lg text-surface-navy leading-[1.08] tracking-[-0.005em] text-balance"
+                  style='font-variation-settings: "opsz" 144;'
+                >
+                  {block.heading}
+                </h2>
+                <div class="mt-8 space-y-5 text-[1.0625rem] leading-[1.7] text-ink text-pretty max-w-[36rem]">
+                  {block.paragraphs.map((p) => <p>{p}</p>)}
+                </div>
+              </div>
+              <div class="lg:col-span-7 lg:col-start-6">
+                <PlaceholderScreenshot
+                  label={block.screenshot.label}
+                  caption={block.screenshot.caption}
+                  aspect="browser"
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <div class="lg:col-span-7 lg:col-start-1 order-2 lg:order-1">
+                <PlaceholderScreenshot
+                  label={block.screenshot.label}
+                  caption={block.screenshot.caption}
+                  aspect="browser"
+                />
+              </div>
+              <div class="lg:col-span-5 lg:col-start-8 order-1 lg:order-2">
+                <p class="section-eyebrow">{block.eyebrow}</p>
+                <h2
+                  class="font-display font-normal text-display-lg text-surface-navy leading-[1.08] tracking-[-0.005em] text-balance"
+                  style='font-variation-settings: "opsz" 144;'
+                >
+                  {block.heading}
+                </h2>
+                <div class="mt-8 space-y-5 text-[1.0625rem] leading-[1.7] text-ink text-pretty max-w-[36rem]">
+                  {block.paragraphs.map((p) => <p>{p}</p>)}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

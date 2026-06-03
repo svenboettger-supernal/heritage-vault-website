@@ -1,0 +1,107 @@
+---
+import Section from "@components/Section.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+import Tabs from "@components/Tabs.astro";
+import PlaceholderScreenshot from "@components/PlaceholderScreenshot.astro";
+import Button from "@components/Button.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const tabs = [
+  { key: "principal", label: "The Firm Principal" },
+  { key: "operations", label: "The Director of Operations" },
+  { key: "producer", label: "The Producer / Advisor" },
+];
+
+const panels: Record<
+  string,
+  {
+    eyebrow: string;
+    heading: string;
+    paragraphs: string[];
+    screenshotLabel: string;
+    screenshotCaption: string;
+  }
+> = {
+  principal: {
+    eyebrow: "The buyer",
+    heading: "Firm-grade output, every plan, every time.",
+    paragraphs: [
+      "The managing partner authorizes the license. What lands on the table cannot vary based on which analyst built the plan. Heritage Vault produces the same firm-grade deliverable for every family.",
+      "Reputational risk is the operative variable. Source-linked values, role-based access, and a complete audit trail mean the firm can put any document in front of any client and stand behind it.",
+      "Differentiation is the second. The firms that adopt Heritage Vault take on more clients without expanding the team, and walk into competitive pitches with a deliverable peers cannot match.",
+    ],
+    screenshotLabel: "Firm dashboard",
+    screenshotCaption: "Plans across every client, in one view",
+  },
+  operations: {
+    eyebrow: "The operator",
+    heading: "Hours of manual work, removed from the operations floor.",
+    paragraphs: [
+      "The Director of Operations runs Heritage Vault day to day. Onboarding takes a single named owner, a short training pass, and the first pilot family's documents. From there, the platform pays for itself by week two.",
+      "AI extraction handles the data entry that used to absorb the operations team. Every extracted value links back to the exact sentence in the source document. Reviewer approval is required before anything reaches the client-facing deliverable.",
+      "Adoption is measured in producer behavior. When Heritage Vault is the path of least resistance, the team uses it without being told.",
+    ],
+    screenshotLabel: "Pipeline workflow",
+    screenshotCaption: "Upload, extract, review, build, deliver",
+  },
+  producer: {
+    eyebrow: "The end user",
+    heading: "A deliverable the family can navigate, live.",
+    paragraphs: [
+      "The producer sits across from the family. Heritage Vault is the surface the conversation happens on. The Flow Diagram is the 30,000-foot view of the structure. The Estate Distribution Chart is the live model the family controls.",
+      "Edits made at the table are reflected the moment they are saved. No more 'I'll get back to you with revised numbers.' The conversation that used to require a CFO and an attorney in the room can now happen in real time, with the family at the table.",
+      "The client-facing PDF, branded with the firm's identity, drops at the end of the meeting.",
+    ],
+    screenshotLabel: "Client presentation view",
+    screenshotCaption: "The Estate Distribution Chart at the table",
+  },
+};
+---
+
+<Section background="page" width="wide" padding="loose" id="who-its-for">
+  <SectionTitle
+    eyebrow="Who it's for"
+    heading="Built for the firms that serve every kind of complexity."
+    subheading="A platform designed around the three roles inside a firm."
+    align="center"
+    class="mx-auto mb-16 md:mb-20"
+  />
+
+  <Tabs tabs={tabs} defaultKey="principal" ariaLabel="Audience views">
+    {Object.entries(panels).map(([key, panel]) => (
+      <div
+        id={`panel-${key}`}
+        role="tabpanel"
+        aria-labelledby={`tab-${key}`}
+        hidden={key !== "principal"}
+        class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start"
+      >
+        <div>
+          <p class="section-eyebrow">{panel.eyebrow}</p>
+          <h3
+            class="font-display text-[clamp(1.875rem,3vw,2.5rem)] leading-[1.1] tracking-[-0.005em] text-surface-navy"
+            style='font-variation-settings: "opsz" 144;'
+          >
+            {panel.heading}
+          </h3>
+          <div class="mt-8 space-y-5 text-[1rem] leading-[1.65] text-ink max-w-prose">
+            {panel.paragraphs.map((p) => <p>{p}</p>)}
+          </div>
+          <div class="mt-10">
+            <Button href={`${base}/firms/`} variant="secondary" arrow>
+              See the firm playbook
+            </Button>
+          </div>
+        </div>
+        <div class="lg:pt-2">
+          <PlaceholderScreenshot
+            label={panel.screenshotLabel}
+            caption={panel.screenshotCaption}
+            aspect="browser"
+          />
+        </div>
+      </div>
+    ))}
+  </Tabs>
+</Section>

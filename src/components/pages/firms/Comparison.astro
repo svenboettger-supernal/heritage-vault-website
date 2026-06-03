@@ -1,0 +1,85 @@
+---
+/**
+ * The Roemer-pattern three-card comparison (per brand prompt §Component patterns).
+ * Two neutral "before / today" cards with × bullets, one Heritage navy card with + bullets.
+ */
+import Section from "@components/Section.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+
+const cards = [
+  {
+    tone: "neutral",
+    label: "Without Heritage Vault",
+    items: [
+      "20 to 40 hours per client",
+      "Excel-based asset schedules",
+      "Hand-built PowerPoint flow diagrams",
+      "Version confusion across email",
+      "Manual PDF assembly",
+    ],
+  },
+  {
+    tone: "neutral",
+    label: "Generic estate-planning software",
+    items: [
+      "Mass-market features",
+      "No UHNW complexity",
+      "No source linking",
+      "No firm-grade deliverable",
+    ],
+  },
+  {
+    tone: "heritage",
+    label: "Heritage Vault",
+    items: [
+      "Under 2 hours per client",
+      "Source-linked values",
+      "Auto-generated Flow Diagrams",
+      "Firm-branded deliverables",
+      "Foreman on every workflow stage",
+    ],
+  },
+];
+---
+
+<Section background="muted" width="default" padding="loose" id="comparison">
+  <div class="mb-16 md:mb-20">
+    <SectionTitle
+      eyebrow="What changes"
+      heading="The work, before and after."
+      subheading="From spreadsheet and PowerPoint to one workspace."
+    />
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+    {cards.map((card) => (
+      <article
+        class:list={[
+          "p-8 md:p-9 rounded",
+          card.tone === "heritage"
+            ? "bg-surface-navy text-ink-on-dark on-dark border border-surface-navy"
+            : "bg-surface-card text-ink border border-rule",
+        ]}
+      >
+        <p class="section-eyebrow !mb-6">{card.label}</p>
+
+        <ul class="list-none p-0 m-0 space-y-3 text-[0.9375rem] leading-[1.65]">
+          {card.items.map((item) => (
+            <li class="flex gap-3">
+              <span
+                aria-hidden="true"
+                class:list={[
+                  "font-mono shrink-0 leading-[1.6]",
+                  card.tone === "heritage" ? "text-bronze" : "text-ink-muted",
+                ]}
+              >
+                {card.tone === "heritage" ? "+" : "×"}
+              </span>
+              <span class:list={card.tone === "heritage" ? "text-ink-on-dark" : "text-ink"}>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+    ))}
+  </div>
+</Section>

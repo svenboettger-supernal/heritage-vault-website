@@ -1,0 +1,77 @@
+---
+/**
+ * Workflow ribbon — Upload → Extract → Review → Build → Deliver.
+ * Horizontal 5-step ribbon on desktop, stacks vertically on mobile.
+ * Mono "01" numerals + Inter 14px uppercase step names + connecting hairlines.
+ * This is the navigation map for the rest of the page.
+ */
+import Container from "@components/Container.astro";
+
+const steps = [
+  { num: "01", name: "Upload", blurb: "Drag the family's documents in." },
+  { num: "02", name: "Extract", blurb: "AI reads every page in parallel." },
+  { num: "03", name: "Review", blurb: "A producer approves each value." },
+  { num: "04", name: "Build", blurb: "Refine diagrams, model scenarios." },
+  { num: "05", name: "Deliver", blurb: "One-click branded PDF export." },
+];
+---
+
+<section class="bg-surface-muted py-12 md:py-16" aria-labelledby="workflow-ribbon-title">
+  <Container width="wide">
+    <h2 id="workflow-ribbon-title" class="sr-only">The Heritage Vault workflow</h2>
+
+    {/* Desktop, horizontal */}
+    <ol class="hidden md:grid grid-cols-5 items-start gap-0">
+      {steps.map((step, i) => (
+        <li class="relative px-5 lg:px-6">
+          {/* Connecting hairline (between steps, not after last) */}
+          {i < steps.length - 1 && (
+            <span
+              aria-hidden="true"
+              class="absolute top-[14px] left-[calc(50%+24px)] right-[-50%] h-px bg-rule"
+            ></span>
+          )}
+          <div class="relative flex flex-col">
+            <span
+              class="font-mono text-[12px] tracking-[0.08em] text-bronze"
+              data-figures="tabular"
+            >
+              {step.num}
+            </span>
+            <span class="mt-3 font-sans text-[14px] font-medium tracking-nav uppercase text-surface-navy">
+              {step.name}
+            </span>
+            <span class="mt-2 text-[13px] leading-snug text-ink-muted max-w-[200px]">
+              {step.blurb}
+            </span>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    {/* Mobile, stacked vertical with connecting hairlines */}
+    <ol class="md:hidden flex flex-col">
+      {steps.map((step, i) => (
+        <li class="relative flex gap-4 pb-6">
+          <div class="flex flex-col items-center">
+            <span
+              class="font-mono text-[12px] tracking-[0.08em] text-bronze"
+              data-figures="tabular"
+            >
+              {step.num}
+            </span>
+            {i < steps.length - 1 && (
+              <span aria-hidden="true" class="mt-2 flex-1 w-px bg-rule"></span>
+            )}
+          </div>
+          <div class="flex-1 pt-[1px]">
+            <p class="font-sans text-[14px] font-medium tracking-nav uppercase text-surface-navy">
+              {step.name}
+            </p>
+            <p class="mt-1 text-[13px] leading-snug text-ink-muted">{step.blurb}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </Container>
+</section>

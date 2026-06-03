@@ -1,0 +1,62 @@
+---
+/**
+ * Wealth.com-style video card — poster image + centered circular play-overlay + caption.
+ * Click opens a <dialog> (or external link) — currently a placeholder per
+ * SOW Brand Video Bundle (production video to be supplied).
+ */
+import RemoteImage from "@components/RemoteImage.astro";
+
+export interface Props {
+  /** Unsplash photo ID for the poster. */
+  posterId: string;
+  /** Title displayed beneath the poster. */
+  title: string;
+  /** Optional caption — speaker name, role, etc. */
+  caption?: string;
+  /** Aspect ratio. */
+  aspect?: "landscape" | "wide" | "square";
+  /** Loading strategy. */
+  loading?: "eager" | "lazy";
+  class?: string;
+}
+
+const {
+  posterId,
+  title,
+  caption,
+  aspect = "landscape",
+  loading = "lazy",
+  class: className = "",
+} = Astro.props;
+---
+
+<article class:list={["group relative overflow-hidden rounded card-surface", className]}>
+  {/* placeholder: production video to be supplied per Brand Video Bundle SOW */}
+  <div class="relative">
+    <RemoteImage
+      photoId={posterId}
+      alt={`${title} video poster`}
+      aspect={aspect}
+      loading={loading}
+      rounded={false}
+      class="rounded-t"
+    />
+    <button
+      type="button"
+      class="absolute inset-0 flex items-center justify-center"
+      aria-label={`Play: ${title}`}
+    >
+      <span
+        class="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-surface-navy/95 text-ink-on-dark transition-transform duration-fast group-hover:scale-105 shadow-elevated"
+      >
+        <svg width="22" height="24" viewBox="0 0 22 24" fill="currentColor" aria-hidden="true">
+          <path d="M2 1.5v21l18-10.5L2 1.5z" />
+        </svg>
+      </span>
+    </button>
+  </div>
+  <div class="p-6 md:p-7">
+    <h3 class="font-sans text-[1rem] md:text-[1.0625rem] font-medium text-surface-navy leading-snug">{title}</h3>
+    {caption && <p class="mt-2 text-[13px] text-ink-muted">{caption}</p>}
+  </div>
+</article>

@@ -1,0 +1,67 @@
+---
+/**
+ * Origin — the longer narrative. Editorial body block (~250-350 words) via
+ * <Prose>, with one quiet display-md pull-quote (Source Serif 4 navy,
+ * hairline left-rule). Tells the Heritage Strategies → Heritage Vault arc.
+ */
+import Section from "@components/Section.astro";
+import Prose from "@components/Prose.astro";
+---
+
+<Section background="page" width="prose" padding="default" id="origin">
+  <p class="section-eyebrow">Origin</p>
+  <h2
+    class="font-display font-normal text-display-lg text-surface-navy leading-[1.08] tracking-[-0.005em] text-balance mb-12 md:mb-14"
+    style='font-variation-settings: "opsz" 144;'
+  >
+    Fifteen years of practice, written into a platform.
+  </h2>
+
+  <Prose size="lg">
+    <p>
+      Heritage Strategies LLC was founded in New York in 2009. The firm exists for a narrow purpose: to produce, by hand, the consolidated estate-planning view that an ultra-high-net-worth family and its advisors actually work from. The firm calls that artifact the Approach Book.
+    </p>
+
+    <p>
+      Every Approach Book is built around the same five surfaces. The family's people. The family's assets. The family's insurance. The structural diagram of every trust, entity, and ownership relationship. The distribution model that shows what happens at each generation. The firm has produced these books for one family at a time, for fifteen years.
+    </p>
+
+    <blockquote class="origin-pullquote not-prose">
+      <p
+        class="font-display text-display-md text-surface-navy leading-[1.18] tracking-[-0.005em] text-balance"
+        style='font-variation-settings: "opsz" 60;'
+      >
+        The methodology is older than the platform. The platform is the methodology, finally portable.
+      </p>
+    </blockquote>
+
+    <p>
+      The methodology was refined across thousands of UHNW family engagements. Concentrated stock positions. Multi-state property. Foreign assets. Second marriages. Dynasty trusts. Charitable remainder trusts. Illiquid operating businesses. Every case-design pattern the firm now considers standard was earned on a real family with a real estate.
+    </p>
+
+    <p>
+      In 2025 the firm's own production team began using internal software to assemble the book that had always been built by hand. Documents were uploaded once, parsed once, and the five surfaces populated themselves. The Approach Book that used to take twenty to forty hours started arriving in under two.
+    </p>
+
+    <p>
+      Heritage Vault is that internal tool, productized. Multi-tenant, source-linked, branded for the partner firm rather than for Heritage Strategies. It exists so that other firms serving the same kind of complexity can produce work to the same standard, in a fraction of the time.
+    </p>
+  </Prose>
+</Section>
+
+<style>
+  .origin-pullquote {
+    margin: 2.5rem 0 2.5rem 0;
+    padding: 0.25rem 0 0.25rem 1.75rem;
+    border-left: 1px solid hsl(var(--bronze));
+  }
+  .origin-pullquote p {
+    margin: 0;
+  }
+  @media (min-width: 768px) {
+    .origin-pullquote {
+      margin: 3rem 0 3rem 0;
+      padding-left: 2.25rem;
+    }
+  }
+</style>

@@ -1,0 +1,45 @@
+---
+/**
+ * /request-access — the qualified-inbound capture page per brief §7.6.
+ *
+ * Composition (top to bottom):
+ *  1. Hero (parchment, approachable title plate)
+ *  2. Two-column form + sidebar
+ *  3. Trust band
+ *  4. "What we don't do" reassurance block
+ *  5. Mini FAQ (4 items, inline)
+ *  6. No closing CTA — the page is the CTA.
+ */
+import Layout from "@layouts/Layout.astro";
+import Hero from "@components/pages/request-access/Hero.astro";
+import FormSection from "@components/pages/request-access/FormSection.astro";
+import TrustBand from "@components/pages/request-access/TrustBand.astro";
+import NoGoLines from "@components/pages/request-access/NoGoLines.astro";
+import AccessFaq from "@components/pages/request-access/AccessFaq.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Request access to Heritage Vault",
+  description:
+    "Request access to Heritage Vault. Heritage Vault is a firm-level license. A member of the team responds within one business day.",
+  publisher: {
+    "@type": "Organization",
+    name: "Heritage Strategies LLC",
+    url: "https://heritagesllc.com",
+  },
+};
+---
+
+<Layout
+  title="Request access"
+  description="Heritage Vault is a firm-level license. Tell us about your firm and a member of the team will respond within one business day. All inquiries are confidential."
+  pathname="/request-access/"
+  jsonLd={jsonLd}
+>
+  <Hero />
+  <FormSection />
+  <TrustBand />
+  <NoGoLines />
+  <AccessFaq />
+</Layout>

@@ -1,0 +1,67 @@
+---
+/**
+ * Hot-linked Unsplash image wrapper.
+ * Pass the photo ID (the slug after `/photo-` in any Unsplash URL) and
+ * sizing/cropping params; this renders an <img> against the Unsplash CDN.
+ *
+ * Curated photo IDs are in the brand-allowed list — see plan.
+ * NEVER use generic wealth stock (handshakes, sunset boardrooms, champagne).
+ */
+export interface Props {
+  photoId: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  aspect?: "portrait" | "landscape" | "square" | "wide";
+  /** Crop strategy for Unsplash. */
+  crop?: "entropy" | "faces" | "edges" | "center";
+  /** "eager" for above-the-fold; "lazy" otherwise. */
+  loading?: "eager" | "lazy";
+  class?: string;
+  /** Rounded corners. */
+  rounded?: boolean;
+}
+
+const {
+  photoId,
+  alt,
+  width = 1200,
+  height,
+  aspect = "landscape",
+  crop = "entropy",
+  loading = "lazy",
+  class: className = "",
+  rounded = true,
+} = Astro.props;
+
+const aspectRatios: Record<NonNullable<Props["aspect"]>, number> = {
+  portrait: 3 / 4,
+  landscape: 16 / 10,
+  square: 1,
+  wide: 21 / 9,
+};
+const computedHeight = height ?? Math.round(width / aspectRatios[aspect]);
+const src = `https://images.unsplash.com/${photoId}?fm=webp&w=${width}&h=${computedHeight}&q=80&auto=format&fit=crop&crop=${crop}`;
+const srcset = [600, 900, 1200, 1600, 2000]
+  .map((w) => {
+    const h = Math.round(w / aspectRatios[aspect]);
+    return `https://images.unsplash.com/${photoId}?fm=webp&w=${w}&h=${h}&q=80&auto=format&fit=crop&crop=${crop} ${w}w`;
+  })
+  .join(", ");
+---
+
+<img
+  src={src}
+  srcset={srcset}
+  sizes="(min-width: 1200px) 1200px, 100vw"
+  alt={alt}
+  width={width}
+  height={computedHeight}
+  loading={loading}
+  decoding="async"
+  class:list={[
+    "block w-full h-auto",
+    rounded && "rounded",
+    className,
+  ]}
+/>

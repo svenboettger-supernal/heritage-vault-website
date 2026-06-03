@@ -1,0 +1,28 @@
+---
+/**
+ * Security FAQ. Wealth.com two-column pattern, parchment ground.
+ */
+import { getCollection } from "astro:content";
+import Container from "@components/Container.astro";
+import FAQ from "@components/FAQ.astro";
+
+const faqEntries = (
+  await getCollection("faqs", ({ data }) => data.page === "security")
+).sort((a, b) => a.data.order - b.data.order);
+
+const items = faqEntries.map((entry) => ({
+  question: entry.data.question,
+  answer: entry.data.answer,
+}));
+---
+
+<section class="bg-surface-page py-24 md:py-32" aria-label="Security FAQ">
+  <Container width="default">
+    <FAQ
+      layout="two-column"
+      eyebrow="Security questions"
+      heading="What compliance teams ask."
+      items={items}
+    />
+  </Container>
+</section>

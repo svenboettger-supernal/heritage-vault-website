@@ -1,0 +1,25 @@
+---
+export interface Props {
+  items: string[];
+  onDark?: boolean;
+  align?: "left" | "center";
+  class?: string;
+}
+const { items, onDark = false, align = "center", class: className = "" } = Astro.props;
+---
+
+<ul
+  class:list={[
+    "flex flex-wrap items-center gap-x-1.5 gap-y-2 text-[12.5px] font-medium leading-tight",
+    align === "center" ? "justify-center" : "justify-start",
+    onDark ? "text-ink-muted-on-dark" : "text-ink-muted",
+    className,
+  ]}
+>
+  {items.map((item, idx) => (
+    <li class="flex items-center gap-x-1.5">
+      <span>{item}</span>
+      {idx < items.length - 1 && <span aria-hidden="true" class="opacity-50 px-2">·</span>}
+    </li>
+  ))}
+</ul>

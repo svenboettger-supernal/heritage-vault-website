@@ -1,0 +1,33 @@
+---
+/**
+ * About hero — parchment editorial.
+ * Reading-page hero on cool near-white ground (NOT a navy panel, NOT the
+ * continuous wave). Asymmetric Source Serif 4 display headline + lede.
+ * Per brief §7.4 + master plan: this is the reading page on the site, so
+ * the hero is a calm title plate, not a marketing panel.
+ */
+import Container from "@components/Container.astro";
+---
+
+<section class="bg-surface-page pt-16 md:pt-24 lg:pt-32 pb-16 md:pb-20 lg:pb-24" aria-labelledby="about-hero-title">
+  <Container width="default">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-6 lg:gap-x-12">
+      <div class="lg:col-span-10 lg:col-start-1">
+        <p class="section-eyebrow">About Heritage Vault</p>
+        <h1
+          id="about-hero-title"
+          class="font-display font-normal text-display-xl text-surface-navy leading-[1.04] tracking-[-0.005em] text-balance"
+          style='font-variation-settings: "opsz" 144;'
+        >
+          Built on a methodology that predates the platform.
+        </h1>
+      </div>
+
+      <div class="lg:col-span-9 lg:col-start-1">
+        <p class="mt-8 lg:mt-10 text-[19px] md:text-[21px] leading-[1.55] text-ink-muted text-pretty">
+          Heritage Vault is the product of Heritage Strategies LLC, the multi-family office that has produced these plans by hand since 2009. The platform digitizes a methodology, not the other way around.
+        </p>
+      </div>
+    </div>
+  </Container>
+</section>

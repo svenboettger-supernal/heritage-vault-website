@@ -1,0 +1,59 @@
+---
+/**
+ * "Three steps to live in your firm." Contract execution to first live engagement.
+ * Three steps with mono numerals, each on bg-surface-card with bronze 1px top border.
+ */
+import Section from "@components/Section.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+
+const steps = [
+  {
+    n: "01",
+    title: "Pilot onboarding",
+    timing: "Week 1–2",
+    body: "Tenant provisioned, SSO configured, your operations lead trained on the five surfaces.",
+  },
+  {
+    n: "02",
+    title: "First live engagement",
+    timing: "Week 2–3",
+    body: "Your team runs a real client book through Vault. Heritage Vault stays on call.",
+  },
+  {
+    n: "03",
+    title: "Full team rollout",
+    timing: "Week 3–4",
+    body: "Producers and advisors trained, internal review cadence locked, support channel opened.",
+  },
+];
+---
+
+<Section background="page" width="default" padding="loose" id="engagement">
+  <div class="mb-16 md:mb-20">
+    <SectionTitle
+      eyebrow="The engagement"
+      heading="Three steps to live in your firm."
+      subheading="From contract execution to your first live client engagement, typically four weeks."
+    />
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    {steps.map((step) => (
+      <article
+          class="bg-surface-card border border-rule p-8 md:p-9 flex flex-col"
+          style="border-top: 1px solid hsl(var(--bronze));"
+        >
+        <div class="flex items-baseline justify-between mb-8">
+          <span class="font-mono text-[13px] text-bronze tracking-[0.12em]">{step.n}</span>
+          <span class="eyebrow text-[10px]">{step.timing}</span>
+        </div>
+        <h3 class="font-display text-[1.625rem] leading-[1.2] text-surface-navy font-normal">
+          {step.title}
+        </h3>
+        <p class="mt-4 text-[0.9375rem] leading-[1.7] text-ink text-pretty">
+          {step.body}
+        </p>
+      </article>
+    ))}
+  </div>
+</Section>

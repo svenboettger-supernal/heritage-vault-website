@@ -1,0 +1,127 @@
+---
+import Container from "@components/Container.astro";
+
+/**
+ * Wealth.com-style oval-card recognition strip.
+ *
+ * 9999px pill radius is the ONLY place on the page where pills are sanctioned,
+ * per brand prompt §Border-radius: "9999px for status pills and avatars only."
+ * These ovals function as anchors of credibility, not interactive controls.
+ *
+ * Specifics are grounded in real Heritage Strategies origin (per brief §4).
+ * Industry-award particulars are intentionally left as placeholders until
+ * Heritage AI supplies verified copy (per brief §11).
+ */
+
+type Oval =
+  | { kind: "year"; year: string; line: string; tag: string }
+  | { kind: "backed"; line: string; partner: string };
+
+const ovals: Oval[] = [
+  {
+    kind: "year",
+    year: "2009",
+    line: "Built on the Approach Book methodology used in production since",
+    tag: "ORIGIN",
+  },
+  {
+    kind: "backed",
+    line: "BACKED BY",
+    partner: "Heritage Strategies LLC",
+  },
+  {
+    kind: "year",
+    year: "15+ YRS",
+    line: "Refined inside a New York multi-family-office practice",
+    tag: "FOR FIRMS",
+  },
+  {
+    kind: "backed",
+    line: "BUILT WITH",
+    partner: "Heritage's senior partners",
+  },
+  {
+    kind: "year",
+    year: "8 TYPES",
+    line: "Eight estate-planning document types ingested end to end",
+    tag: "PLATFORM",
+  },
+  {
+    kind: "backed",
+    line: "GROUNDED IN",
+    partner: "Thousands of UHNW engagements",
+  },
+];
+---
+
+<!-- placeholder: specific industry awards to be supplied by Heritage AI per brief §11 -->
+<section
+  class="bg-surface-muted py-10 md:py-14 border-y border-rule"
+  aria-label="Recognition and partners"
+>
+  <Container width="wide">
+    <div class="flex items-start justify-between gap-6 mb-8 md:mb-10">
+      <p class="eyebrow">Provenance</p>
+      <p class="hidden sm:block text-[12px] text-ink-muted max-w-xs text-right">
+        A platform that arrived with a track record.
+      </p>
+    </div>
+
+    <div class="-mx-6 sm:-mx-8 lg:-mx-12">
+      <div class="overflow-x-auto px-6 sm:px-8 lg:px-12 scrollbar-thin">
+        <ul
+          class="flex items-stretch gap-3 md:gap-4 min-w-max pb-2"
+          role="list"
+        >
+          {ovals.map((oval) => (
+            <li class="shrink-0">
+              {oval.kind === "year" ? (
+                <div
+                  class="flex items-center gap-4 rounded-full border border-surface-navy/30 bg-surface-card px-5 md:px-6 py-3 md:py-3.5 max-w-[28rem]"
+                >
+                  <span
+                    class="font-display text-[1.5rem] md:text-[1.75rem] leading-none text-surface-navy shrink-0 pr-4 border-r border-rule"
+                    style='font-variation-settings: "opsz" 60;'
+                    data-figures="tabular"
+                  >
+                    {oval.year}
+                  </span>
+                  <span class="text-[12px] md:text-[12.5px] text-ink leading-snug pr-2">
+                    {oval.line}
+                  </span>
+                  <span class="ml-auto pl-3 border-l border-rule eyebrow text-[10px] shrink-0">
+                    {oval.tag}
+                  </span>
+                </div>
+              ) : (
+                <div
+                  class="flex items-center gap-3 rounded-full bg-surface-navy text-ink-on-dark px-5 md:px-6 py-3 md:py-3.5 max-w-[28rem]"
+                >
+                  <span class="text-[10px] md:text-[10.5px] font-medium tracking-[0.22em] uppercase text-[hsl(35_26%_64%)] shrink-0">
+                    {oval.line}
+                  </span>
+                  <span class="text-[12.5px] md:text-[13px] leading-snug font-medium text-ink-on-dark">
+                    {oval.partner}
+                  </span>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--bronze) / 0.4) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar { height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--bronze) / 0.4);
+    border-radius: 9999px;
+  }
+</style>

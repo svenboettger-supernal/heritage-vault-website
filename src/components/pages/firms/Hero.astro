@@ -1,0 +1,51 @@
+---
+/**
+ * For Firms hero. Editorial parchment ground, NOT a navy panel.
+ * Quiet ContinuousWave at low opacity sits behind the type without competing.
+ */
+import Container from "@components/Container.astro";
+import Button from "@components/Button.astro";
+import ContinuousWave from "@components/ContinuousWave.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<section
+  class="relative isolate overflow-hidden bg-surface-page pt-16 md:pt-24 lg:pt-32 pb-20 md:pb-28"
+  aria-labelledby="firms-hero-title"
+>
+  {/* Very quiet wave on the light ground, drops in opacity so it never fights the headline. */}
+  <div class="absolute inset-0 opacity-[0.35] pointer-events-none" aria-hidden="true">
+    <ContinuousWave tone="on-light" />
+  </div>
+
+  <Container class="relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-6 lg:gap-x-12">
+      <div class="lg:col-span-10 lg:col-start-1">
+        <p class="section-eyebrow">For firms</p>
+        <h1
+          id="firms-hero-title"
+          class="font-display font-normal text-display-xl text-surface-navy leading-[1.04] tracking-[-0.005em] text-balance"
+          style='font-variation-settings: "opsz" 144;'
+        >
+          For the firms that serve high-net-worth families.
+        </h1>
+      </div>
+
+      <div class="lg:col-span-8 lg:col-start-1">
+        <p class="mt-6 lg:mt-8 text-[19px] md:text-[21px] leading-[1.55] text-ink-muted text-pretty">
+          Heritage Vault is a firm-level license. End families never sign in directly. Your team controls the engagement, your brand controls the deliverable.
+        </p>
+
+        <div class="mt-10 flex flex-wrap items-center gap-4">
+          <Button href={`${base}/request-access/`} variant="primary" size="lg" arrow>
+            Request access
+          </Button>
+          <Button href={`${base}/product/`} variant="secondary" size="lg" arrow>
+            See the product
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,52 @@
+---
+/**
+ * "Three commitments from a partner firm." What Heritage Vault asks
+ * in exchange for the license. Three cards in a row with rule borders.
+ */
+import Section from "@components/Section.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+
+const commitments = [
+  {
+    title: "A single named operations owner",
+    body: "One person inside your firm owns adoption end to end. Director of operations or senior producer. Not a committee.",
+  },
+  {
+    title: "Real client documents for the pilot",
+    body: "We onboard against real books, not sandbox data. Confidentiality is contractual, mutual NDA before the first upload.",
+  },
+  {
+    title: "A 30-day review cadence",
+    body: "Your operations lead meets with the Vault team every 30 days for the first two quarters. Real feedback shapes the roadmap.",
+  },
+];
+---
+
+<Section background="card" width="default" padding="loose" id="commitments">
+  <div class="mb-16 md:mb-20">
+    <SectionTitle
+      eyebrow="What we ask"
+      heading="Three commitments from a partner firm."
+      subheading="We work with firms that take adoption seriously, not procurement firms."
+    />
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 border-y border-rule">
+    {commitments.map((c, idx) => (
+      <div
+        class:list={[
+          "p-8 md:p-10",
+          idx < commitments.length - 1 ? "md:border-r border-rule" : "",
+          idx > 0 ? "border-t md:border-t-0 border-rule" : "",
+        ]}
+      >
+        <h3 class="font-display text-[1.5rem] md:text-[1.625rem] leading-[1.2] text-surface-navy font-normal text-balance">
+          {c.title}
+        </h3>
+        <p class="mt-5 text-[0.9375rem] leading-[1.7] text-ink text-pretty">
+          {c.body}
+        </p>
+      </div>
+    ))}
+  </div>
+</Section>

@@ -1,0 +1,35 @@
+---
+/**
+ * Static stat — Source Serif 4 number + bronze eyebrow label.
+ * NEVER animated. Numbers are supposed to feel old, not new.
+ */
+export interface Props {
+  value: string;
+  label: string;
+  detail?: string;
+  onDark?: boolean;
+  class?: string;
+}
+const { value, label, detail, onDark = false, class: className = "" } = Astro.props;
+---
+
+<div class:list={["flex flex-col gap-2", className]}>
+  <span
+    class:list={[
+      "font-display text-display-md leading-none tracking-[-0.005em]",
+      onDark ? "text-ink-on-dark" : "text-surface-navy",
+    ]}
+    data-figures="tabular"
+    style='font-variation-settings: "opsz" 60;'
+  >
+    {value}
+  </span>
+  <span class:list={["eyebrow text-[11px]", onDark && "text-[hsl(35_26%_64%)]"]}>
+    {label}
+  </span>
+  {detail && (
+    <span class:list={["text-sm leading-relaxed max-w-xs", onDark ? "text-ink-muted-on-dark" : "text-ink-muted"]}>
+      {detail}
+    </span>
+  )}
+</div>

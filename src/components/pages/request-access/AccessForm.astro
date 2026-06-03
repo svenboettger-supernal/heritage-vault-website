@@ -1,0 +1,183 @@
+---
+/**
+ * AccessForm — the request-access form per brief §7.6.
+ *
+ * Design intent: a private bank's confidential-correspondence form, not a
+ * Calendly embed or HubSpot widget. Editorial card on pure white, generous
+ * padding, bronze small-caps labels, a single filled-navy submit.
+ *
+ * Submission: `<form method="GET" action="mailto:...">` opens the visitor's
+ * own mail client. No third-party form handler, no JS dependency.
+ */
+import Button from "@components/Button.astro";
+
+const fields = {
+  role: [
+    "Principal",
+    "Director of Operations",
+    "Advisor",
+    "Compliance",
+    "Other",
+  ],
+  aum: [
+    "Under $500M",
+    "$500M – $2B",
+    "$2B+",
+    "Prefer not to share",
+  ],
+  pilot: [
+    "1-5",
+    "6-15",
+    "16-50",
+    "50+",
+  ],
+};
+
+// Shared classes for inputs / selects / textareas — strict brand tokens.
+const controlClass = [
+  "block w-full bg-surface-card border border-input rounded shadow-input",
+  "px-3.5 py-3 text-[15px] text-ink placeholder:text-ink-placeholder",
+  "font-sans leading-[1.5]",
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-state-blue",
+  "focus:border-state-blue",
+  "transition-colors duration-fast",
+].join(" ");
+
+const labelClass = "block text-[11px] font-medium tracking-[0.22em] text-bronze uppercase mb-2";
+---
+
+<form
+  method="GET"
+  action="mailto:vault@getsupernal.ai"
+  enctype="text/plain"
+  class="card-surface p-8 md:p-10 lg:p-12"
+  aria-label="Request access to Heritage Vault"
+>
+  {/* Hidden subject — visitor's mail client picks this up via the mailto query. */}
+  <input type="hidden" name="subject" value="Heritage Vault: access request" />
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
+    {/* Full name */}
+    <div class="md:col-span-1">
+      <label for="ra-name" class={labelClass}>Full name</label>
+      <input
+        id="ra-name"
+        name="Full name"
+        type="text"
+        autocomplete="name"
+        required
+        class={controlClass}
+      />
+    </div>
+
+    {/* Work email */}
+    <div class="md:col-span-1">
+      <label for="ra-email" class={labelClass}>Work email</label>
+      <input
+        id="ra-email"
+        name="Work email"
+        type="email"
+        autocomplete="email"
+        required
+        class={controlClass}
+      />
+    </div>
+
+    {/* Firm name */}
+    <div class="md:col-span-2">
+      <label for="ra-firm" class={labelClass}>Firm name</label>
+      <input
+        id="ra-firm"
+        name="Firm name"
+        type="text"
+        autocomplete="organization"
+        required
+        class={controlClass}
+      />
+    </div>
+
+    {/* Role */}
+    <div class="md:col-span-1">
+      <label for="ra-role" class={labelClass}>Role</label>
+      <div class="relative">
+        <select
+          id="ra-role"
+          name="Role"
+          required
+          class:list={[controlClass, "appearance-none pr-10 bg-surface-card"]}
+        >
+          <option value="" disabled selected hidden>Select a role</option>
+          {fields.role.map((opt) => <option value={opt}>{opt}</option>)}
+        </select>
+        <span aria-hidden="true" class="pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-bronze">
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 1.5 6 6.5 11 1.5" />
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    {/* Firm AUM band */}
+    <div class="md:col-span-1">
+      <label for="ra-aum" class={labelClass}>Firm AUM band</label>
+      <div class="relative">
+        <select
+          id="ra-aum"
+          name="Firm AUM band"
+          required
+          class:list={[controlClass, "appearance-none pr-10 bg-surface-card"]}
+        >
+          <option value="" disabled selected hidden>Select a range</option>
+          {fields.aum.map((opt) => <option value={opt}>{opt}</option>)}
+        </select>
+        <span aria-hidden="true" class="pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-bronze">
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 1.5 6 6.5 11 1.5" />
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    {/* Expected pilot client count */}
+    <div class="md:col-span-2">
+      <label for="ra-pilot" class={labelClass}>Expected pilot client count</label>
+      <div class="relative">
+        <select
+          id="ra-pilot"
+          name="Expected pilot client count"
+          class:list={[controlClass, "appearance-none pr-10 bg-surface-card"]}
+        >
+          <option value="" disabled selected hidden>Select a range</option>
+          {fields.pilot.map((opt) => <option value={opt}>{opt}</option>)}
+        </select>
+        <span aria-hidden="true" class="pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-bronze">
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 1.5 6 6.5 11 1.5" />
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    {/* What you're hoping to solve */}
+    <div class="md:col-span-2">
+      <label for="ra-notes" class={labelClass}>What you’re hoping to solve</label>
+      <textarea
+        id="ra-notes"
+        name="What you’re hoping to solve"
+        rows="5"
+        class:list={[controlClass, "resize-y"]}
+        placeholder="Optional. The shape of the engagement you have in mind, the level of complexity in your typical client, or any specific question for the team."
+      ></textarea>
+    </div>
+  </div>
+
+  <div class="mt-10 flex flex-wrap items-center gap-4">
+    <Button type="submit" variant="primary" size="lg" arrow>
+      Request access
+    </Button>
+  </div>
+
+  <p class="mt-6 text-[12px] leading-[1.6] text-ink-muted max-w-[44ch]">
+    Heritage Vault responds within one business day. All inquiries are confidential by default. We will not share your firm details with any party outside the Heritage Vault team.
+  </p>
+</form>

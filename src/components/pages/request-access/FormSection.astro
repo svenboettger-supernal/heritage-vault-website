@@ -1,0 +1,22 @@
+---
+/**
+ * FormSection — two-column layout per brief §7.6.
+ * Left ~60% form, right ~40% sidebar. Stacks on mobile.
+ */
+import Container from "@components/Container.astro";
+import AccessForm from "@components/pages/request-access/AccessForm.astro";
+import AccessSidebar from "@components/pages/request-access/AccessSidebar.astro";
+---
+
+<section class="bg-surface-page pb-16 md:pb-20 lg:pb-24" aria-label="Request access form">
+  <Container width="default">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-12">
+      <div class="lg:col-span-7">
+        <AccessForm />
+      </div>
+      <div class="lg:col-span-5">
+        <AccessSidebar />
+      </div>
+    </div>
+  </Container>
+</section>

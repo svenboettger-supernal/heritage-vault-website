@@ -1,0 +1,46 @@
+---
+/**
+ * Foreman block. Heritage Vault's AI Employee, on the quiet navy inset.
+ * Two-column 50/50: SectionTitle left, screenshot right.
+ */
+import Container from "@components/Container.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+import PlaceholderScreenshot from "@components/PlaceholderScreenshot.astro";
+---
+
+<section class="bg-surface-navy on-dark text-ink-on-dark py-24 md:py-32" aria-labelledby="foreman-heading">
+  <Container>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div>
+        <SectionTitle
+          eyebrow="The AI Employee"
+          heading="Foreman."
+          subheading="The named presence inside Heritage Vault."
+        />
+
+        <div class="mt-10 space-y-5 text-[1.0625rem] leading-[1.7] text-ink-on-dark text-pretty max-w-[36rem]">
+          <p>
+            Vault is not a chat box. It is a structured workspace with an AI Employee, Foreman, that handles document extraction, surface population, and the review-and-edit workflow.
+          </p>
+          <p>
+            Foreman is named, not nameless. Every action Foreman takes is reviewable, overridable, and audit-logged. A producer can step into the workflow at any stage, edit a value, reassign a beneficiary, redraw a flow.
+          </p>
+          <p>
+            Foreman never speaks to your client. Foreman speaks to your team. The client-facing output carries your firm.
+          </p>
+          <p class="text-ink-muted-on-dark">
+            One AI Employee, one workspace, one deliverable. Not a chatbot, not a copilot, not a sidebar of suggestions.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <PlaceholderScreenshot
+          label="Foreman extraction review"
+          caption="Every value source-linked, every decision logged"
+          aspect="browser"
+        />
+      </div>
+    </div>
+  </Container>
+</section>

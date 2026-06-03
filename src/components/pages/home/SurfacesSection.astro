@@ -1,0 +1,122 @@
+---
+import { getCollection } from "astro:content";
+import Section from "@components/Section.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+import PlaceholderScreenshot from "@components/PlaceholderScreenshot.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const surfaces = (await getCollection("surfaces")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const total = surfaces.length;
+const pad = (n: number) => String(n).padStart(2, "0");
+---
+
+<Section background="page" width="wide" padding="loose" id="five-surfaces">
+  <SectionTitle
+    eyebrow="The five surfaces"
+    heading="Five working surfaces. One end-to-end plan."
+    subheading="Each surface is the canonical view of a part of the estate. Together they produce a deliverable a partner can put on the table."
+    align="center"
+    class="mx-auto mb-16 md:mb-20"
+  />
+
+  {/* Hero artifact behind the cards */}
+  <div class="relative">
+    <div
+      class="hidden md:block absolute -top-6 right-0 w-[58%] -z-0 opacity-95 translate-x-6 lg:translate-x-12"
+      aria-hidden="true"
+    >
+      <PlaceholderScreenshot
+        label="Asset Schedule"
+        caption="One consolidated net-worth view"
+        aspect="landscape"
+      />
+    </div>
+
+    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7 mt-0 md:mt-24">
+      {surfaces.slice(0, 2).map((surface, idx) => (
+        <a
+          href={`${base}/product/#${surface.slug}`}
+          class="group card-surface no-underline border-rule hover:border-surface-navy/40 transition-colors duration-fast p-7 md:p-9 flex flex-col gap-5 min-h-[20rem]"
+        >
+          <div class="flex items-baseline justify-between gap-4">
+            <p class="font-mono text-[11px] tracking-[0.18em] uppercase text-bronze">
+              {pad(idx + 1)} / {pad(total)}
+            </p>
+            <span class="eyebrow text-[10px]">Surface</span>
+          </div>
+
+          <h3
+            class="font-display text-[1.75rem] md:text-[2rem] leading-[1.12] tracking-[-0.005em] text-surface-navy"
+            style='font-variation-settings: "opsz" 60;'
+          >
+            {surface.data.name}
+          </h3>
+
+          <p class="text-[0.9375rem] leading-relaxed text-ink line-clamp-3">
+            {surface.data.summary}
+          </p>
+
+          <ul class="mt-1 space-y-2 text-[13.5px] text-ink-muted">
+            {surface.data.capabilities.slice(0, 3).map((cap) => (
+              <li class="flex gap-3 leading-snug">
+                <span aria-hidden="true" class="mt-2 h-px w-3 bg-bronze shrink-0"></span>
+                <span>{cap}</span>
+              </li>
+            ))}
+          </ul>
+
+          <p class="mt-auto pt-4 text-[13px] font-medium tracking-[0.04em] text-surface-navy group-hover:translate-x-0.5 transition-transform duration-fast inline-flex items-center gap-2">
+            Explore the surface
+            <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M1 5h12M9 1l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </p>
+        </a>
+      ))}
+    </div>
+
+    <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7 mt-6 md:mt-7">
+      {surfaces.slice(2).map((surface, idx) => (
+        <a
+          href={`${base}/product/#${surface.slug}`}
+          class="group card-surface no-underline border-rule hover:border-surface-navy/40 transition-colors duration-fast p-6 md:p-7 flex flex-col gap-4"
+        >
+          <p class="font-mono text-[11px] tracking-[0.18em] uppercase text-bronze">
+            {pad(idx + 3)} / {pad(total)}
+          </p>
+
+          <h3
+            class="font-display text-[1.375rem] md:text-[1.5rem] leading-[1.15] tracking-[-0.005em] text-surface-navy"
+            style='font-variation-settings: "opsz" 60;'
+          >
+            {surface.data.name}
+          </h3>
+
+          <p class="text-[14px] leading-relaxed text-ink line-clamp-3">
+            {surface.data.summary}
+          </p>
+
+          <ul class="mt-1 space-y-2 text-[12.5px] text-ink-muted">
+            {surface.data.capabilities.slice(0, 3).map((cap) => (
+              <li class="flex gap-2.5 leading-snug">
+                <span aria-hidden="true" class="mt-1.5 h-px w-2.5 bg-bronze shrink-0"></span>
+                <span>{cap}</span>
+              </li>
+            ))}
+          </ul>
+
+          <p class="mt-auto pt-3 text-[12.5px] font-medium tracking-[0.04em] text-surface-navy group-hover:translate-x-0.5 transition-transform duration-fast inline-flex items-center gap-2">
+            Explore
+            <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M1 5h12M9 1l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </p>
+        </a>
+      ))}
+    </div>
+  </div>
+</Section>

@@ -1,0 +1,21 @@
+---
+/**
+ * Trust band — a single subdued credentials line on a tinted ground.
+ * Per brief §7.6 trust band requirement.
+ */
+import Container from "@components/Container.astro";
+import TrustBar from "@components/TrustBar.astro";
+
+const items = [
+  "Confidential by default",
+  "US data residency",
+  "SOC 2 Type II in progress",
+  "Built by Heritage Strategies LLC (since 2009)",
+];
+---
+
+<section class="bg-surface-muted py-8 md:py-10 border-y border-rule" aria-label="Trust credentials">
+  <Container width="default">
+    <TrustBar items={items} align="center" />
+  </Container>
+</section>

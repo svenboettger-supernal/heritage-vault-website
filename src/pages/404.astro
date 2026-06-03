@@ -1,0 +1,85 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Section from "@components/Section.astro";
+import Eyebrow from "@components/Eyebrow.astro";
+import Heading from "@components/Heading.astro";
+import Button from "@components/Button.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const destinations = [
+  { label: "Home", href: `${base}/` },
+  { label: "Product", href: `${base}/product/` },
+  { label: "For Firms", href: `${base}/firms/` },
+  { label: "About", href: `${base}/about/` },
+  { label: "Security", href: `${base}/security/` },
+  { label: "Request Access", href: `${base}/request-access/` },
+];
+---
+
+<Layout
+  title="Not Found"
+  description="The page you are looking for was not found."
+  pathname="/404/"
+>
+  <Section background="page" width="prose" padding="loose">
+    <header class="mb-12">
+      <Eyebrow
+        class="mb-8 font-mono"
+        as="p"
+      >
+        <span
+          style="font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1;"
+        >404</span>
+      </Eyebrow>
+      <Heading size="display-xl" as="h1">
+        A page that was moved, retired, or never written.
+      </Heading>
+    </header>
+
+    <p class="max-w-prose text-[1rem] leading-[1.65] text-ink">
+      If you arrived here from a link inside Heritage Vault, write to
+      {" "}<a href="mailto:vault@getsupernal.ai">vault@getsupernal.ai</a>
+      {" "}so we can fix it. Otherwise, the destinations below may help.
+    </p>
+
+    <nav
+      aria-label="Major destinations"
+      class="mt-16 border-t border-bronze"
+    >
+      <ul class="grid grid-cols-1 sm:grid-cols-2 sm:gap-x-12">
+        {destinations.map((d) => (
+          <li class="border-b border-bronze">
+            <a
+              href={d.href}
+              class="group flex items-center justify-between py-5 text-[15px] text-ink border-b-0 hover:opacity-70 transition-opacity duration-fast"
+            >
+              <span class="font-sans font-medium">{d.label}</span>
+              <svg
+                width="14"
+                height="10"
+                viewBox="0 0 14 10"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                aria-hidden="true"
+                class="opacity-50 group-hover:opacity-100 transition-opacity duration-fast"
+              >
+                <path d="M1 5h12M9 1l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="mt-16 flex flex-col items-start gap-6">
+      <p class="text-[15px] leading-[1.6] text-ink-muted">
+        When in doubt, speak with the team.
+      </p>
+      <Button href={`${base}/request-access/`} variant="primary" size="md" arrow>
+        Request access
+      </Button>
+    </div>
+  </Section>
+</Layout>

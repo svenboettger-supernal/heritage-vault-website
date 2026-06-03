@@ -1,0 +1,53 @@
+---
+/**
+ * Why this matters — two-column editorial block. Library shelves portrait
+ * left, the gap-in-the-market argument right. Background: bg-surface-card
+ * with rule borders (per master plan).
+ */
+import Container from "@components/Container.astro";
+import RemoteImage from "@components/RemoteImage.astro";
+---
+
+<section
+  class="bg-surface-card border-y border-rule"
+  aria-labelledby="why-this-matters-title"
+>
+  <Container width="wide" class="py-20 md:py-28 lg:py-32">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <div class="lg:col-span-5">
+        <RemoteImage
+          photoId="photo-1568992687947-868a62a9f521"
+          alt="Library shelves with leather-bound volumes"
+          aspect="portrait"
+          width={900}
+        />
+      </div>
+
+      <div class="lg:col-span-7 lg:pl-6 xl:pl-10">
+        <p class="section-eyebrow">Why this matters</p>
+        <h2
+          id="why-this-matters-title"
+          class="font-display font-normal text-display-lg text-surface-navy leading-[1.08] tracking-[-0.005em] text-balance"
+          style='font-variation-settings: "opsz" 144;'
+        >
+          The gap in the market.
+        </h2>
+        <p class="mt-4 text-[1.125rem] md:text-[1.1875rem] leading-[1.55] text-ink-muted text-pretty max-w-[36rem]">
+          Estate planning software was built for mass-market families. Heritage Vault is the opposite.
+        </p>
+
+        <div class="mt-10 space-y-6 max-w-[36rem] text-[1.0625rem] leading-[1.7] text-ink">
+          <p>
+            Generic estate-planning tools target the mass-market family. One trust, one state, one generation, one ledger of beneficiaries. The product surface a national tool needs to ship for that audience is broad and shallow.
+          </p>
+          <p>
+            UHNW families do not fit those tools. The estate carries a concentrated stock position. Property sits across multiple states, sometimes multiple jurisdictions. There are foreign assets, a second marriage, a dynasty trust written in 1994, a charitable remainder trust funded last year, an illiquid operating business that itself has its own governance.
+          </p>
+          <p>
+            The Approach Book methodology has handled that level of complexity, family by family, for fifteen years. Heritage Vault is purpose-built for the same level. The platform now scales what the firm already proved by hand.
+          </p>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

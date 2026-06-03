@@ -1,0 +1,35 @@
+---
+/**
+ * Closing CTA band — navy panel, centered heading + two buttons.
+ */
+import Container from "@components/Container.astro";
+import Button from "@components/Button.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<section class="bg-surface-navy text-ink-on-dark on-dark py-28 md:py-36" aria-labelledby="cta-title">
+  <Container width="default">
+    <div class="max-w-screen-prose mx-auto text-center">
+      <h2
+        id="cta-title"
+        class="font-display font-normal text-display-md text-ink-on-dark leading-[1.1] tracking-[-0.005em] text-balance"
+        style='font-variation-settings: "opsz" 144;'
+      >
+        See the full platform on a private demo.
+      </h2>
+      <p class="mt-5 text-[18px] md:text-[20px] leading-[1.55] text-ink-muted-on-dark text-pretty">
+        A senior member of the Heritage Vault team walks your firm through a real anonymized engagement.
+      </p>
+
+      <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
+        <Button href={`${base}/request-access/`} variant="on-dark" arrow>
+          Request access
+        </Button>
+        <Button href="mailto:vault@getsupernal.ai" variant="ghost-on-dark">
+          Or write to the team
+        </Button>
+      </div>
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,51 @@
+---
+/**
+ * Link-out to Heritage Strategies. Quiet single-line block on the surface-card
+ * ground, asymmetric layout. External link, target="_blank", rel="noopener".
+ * Buttons go through <Button>; the second link uses the text variant.
+ */
+import Container from "@components/Container.astro";
+import Button from "@components/Button.astro";
+---
+
+<section class="bg-surface-card border-y border-rule" aria-labelledby="firm-link-title">
+  <Container width="default" class="py-20 md:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-8 lg:gap-x-12 items-end">
+      <div class="lg:col-span-8">
+        <p class="section-eyebrow">The firm</p>
+        <h2
+          id="firm-link-title"
+          class="font-display font-normal text-display-sm md:text-display-md text-surface-navy leading-[1.18] tracking-[-0.005em] text-balance"
+          style='font-variation-settings: "opsz" 60;'
+        >
+          Heritage Strategies is the multi-family office behind the methodology.
+        </h2>
+      </div>
+
+      <div class="lg:col-span-4 lg:justify-self-end">
+        <div class="flex flex-col items-start lg:items-end gap-4">
+          <Button
+            href="https://heritagesllc.com/"
+            variant="secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+            arrow
+          >
+            Visit Heritage Strategies
+          </Button>
+          <a
+            href="https://heritagesllc.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[13px] tracking-[0.04em] text-surface-navy inline-flex items-center gap-2"
+          >
+            Read the firm's founding story
+            <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M1 5h12M9 1l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

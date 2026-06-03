@@ -1,0 +1,110 @@
+---
+import Section from "@components/Section.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+import RemoteImage from "@components/RemoteImage.astro";
+import VideoCard from "@components/VideoCard.astro";
+
+/**
+ * placeholder: real testimonials to be provided by Heritage AI per brief §11
+ * Names, firms, and quotes are anonymized stand-ins until the partner program
+ * confirms which voices are quotable on the public site.
+ */
+
+type Card =
+  | {
+      kind: "text";
+      avatarPhotoId: string;
+      name: string;
+      role: string;
+      quote: string;
+    }
+  | {
+      kind: "video";
+      posterId: string;
+      title: string;
+      caption: string;
+    };
+
+const cards: Card[] = [
+  {
+    kind: "text",
+    avatarPhotoId: "photo-1521737604893-d14cc237f11d",
+    name: "Anonymized at firm request",
+    role: "Director of Operations · Mid-market wealth advisory firm",
+    quote:
+      "The first plan we built in Heritage Vault took ninety minutes. The same plan, the way we used to build it, was a two-week sprint. The producers stopped emailing me for revisions because the platform handles them at the table.",
+  },
+  {
+    kind: "video",
+    posterId: "photo-1551836022-d5d88e9218df",
+    title: "How a Northeast firm shipped its first ten Vault plans in a quarter",
+    caption: "Managing Partner · Estate-planning firm",
+  },
+  {
+    kind: "text",
+    avatarPhotoId: "photo-1573497019418-b400bb3ab074",
+    name: "Anonymized at firm request",
+    role: "Managing Partner · Estate-planning firm",
+    quote:
+      "Source-linked extraction was the deciding feature. We can put any value in front of a client and surface the sentence in the trust instrument that produced it. The audit trail does what compliance asked us for years ago.",
+  },
+];
+---
+
+<!-- placeholder: real testimonials to be provided by Heritage AI per brief §11 -->
+<Section background="muted" width="wide" padding="loose" id="early-partners">
+  <SectionTitle
+    eyebrow="Early partners"
+    heading="Firms helping shape Heritage Vault."
+    subheading="Partner firms are running pilots in production today. Public attribution follows the partner program."
+    align="center"
+    class="mx-auto mb-14 md:mb-20"
+  />
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
+    {cards.map((card) => (
+      card.kind === "text" ? (
+        <article class="card-surface p-7 md:p-8 flex flex-col gap-5 min-h-[22rem]">
+          <div class="flex items-center gap-4">
+            <span class="block w-12 h-12 rounded-full overflow-hidden shrink-0 bg-surface-muted">
+              <RemoteImage
+                photoId={card.avatarPhotoId}
+                alt={`${card.name} portrait`}
+                aspect="square"
+                width={120}
+                crop="faces"
+                rounded={false}
+                class="w-full h-full object-cover"
+              />
+            </span>
+            <div class="min-w-0">
+              <p class="text-[14px] font-medium text-surface-navy leading-tight truncate">
+                {card.name}
+              </p>
+              <p class="text-[12px] text-ink-muted leading-snug mt-0.5">
+                {card.role}
+              </p>
+            </div>
+          </div>
+
+          <blockquote class="font-display text-[1.0625rem] md:text-[1.125rem] leading-[1.5] text-ink text-balance" style='font-variation-settings: "opsz" 14;'>
+            <span aria-hidden="true" class="text-bronze pr-0.5">“</span>{card.quote}<span aria-hidden="true" class="text-bronze pl-0.5">”</span>
+          </blockquote>
+
+          <p class="mt-auto pt-4 border-t border-rule text-[11px] uppercase tracking-[0.22em] text-bronze">
+            Partner firm · pilot
+          </p>
+        </article>
+      ) : (
+        <div class="min-h-[22rem]">
+          <VideoCard
+            posterId={card.posterId}
+            title={card.title}
+            caption={card.caption}
+            aspect="landscape"
+          />
+        </div>
+      )
+    ))}
+  </div>
+</Section>

@@ -1,0 +1,44 @@
+---
+/**
+ * Compliance summary strip. The "logos-soup" trap, avoided.
+ * Textual badges only — no vendor logos. Each badge is a navy-outlined
+ * card with a single line of all-caps tracking-nav label.
+ */
+import Container from "@components/Container.astro";
+
+const badges = [
+  "SOC 2 Type II, audit in progress",
+  "US data residency",
+  "AES-256 at rest, TLS 1.3 in transit",
+  "Annual third-party penetration test",
+  "CCPA aligned, state equivalents tracked",
+  "Subprocessor list disclosed",
+];
+---
+
+<section class="bg-surface-muted py-12 md:py-16" aria-label="Compliance summary">
+  <Container width="default">
+    <p class="eyebrow mb-8 md:mb-10">Compliance summary</p>
+
+    <ul
+      role="list"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4"
+    >
+      {badges.map((badge) => (
+        <li
+          class="border border-surface-navy/30 bg-surface-card rounded px-5 py-4 flex items-center"
+        >
+          <span
+            class="font-sans text-[11px] md:text-[12px] font-medium tracking-nav uppercase text-surface-navy leading-snug"
+          >
+            {badge}
+          </span>
+        </li>
+      ))}
+    </ul>
+
+    <p class="mt-8 md:mt-10 max-w-screen-prose text-[13.5px] leading-relaxed text-ink-muted">
+      Detailed documentation is shared with qualified firms under NDA. Request a copy on the form below.
+    </p>
+  </Container>
+</section>

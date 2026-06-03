@@ -1,0 +1,90 @@
+---
+/**
+ * The Access-Level model. The only contrast inset on this page.
+ * A 5-row table with mono level numerals and role descriptions.
+ * Tabular figures, thin rule-dark hairline separators.
+ */
+import Container from "@components/Container.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+
+interface Level {
+  level: string;
+  role: string;
+  description: string;
+}
+
+const levels: Level[] = [
+  {
+    level: "L5",
+    role: "Super Admin",
+    description: "Cross-firm operational access. Restricted to the Heritage Vault operations team.",
+  },
+  {
+    level: "L4",
+    role: "Firm Admin",
+    description: "Firm-level configuration, user provisioning, audit log review.",
+  },
+  {
+    level: "L3",
+    role: "Producer",
+    description: "Active engagement work: document upload, surface review, deliverable build.",
+  },
+  {
+    level: "L2",
+    role: "Viewer",
+    description: "Read-only access to a specific engagement.",
+  },
+  {
+    level: "L1",
+    role: "End Client",
+    description: "Optional: secure portal access for the family to view their plan.",
+  },
+];
+---
+
+<section
+  class="bg-surface-dark text-ink-on-dark on-dark py-24 md:py-32"
+  aria-labelledby="access-levels-title"
+>
+  <Container width="default">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-16 items-start">
+      <div class="lg:col-span-5">
+        <SectionTitle
+          eyebrow="Access levels"
+          heading="Five roles, scoped by design."
+          subheading="Per-firm, per-document, per-user. Permissions are explicit, not inherited from convention."
+        />
+      </div>
+
+      <div class="lg:col-span-7">
+        <div class="border-t border-rule-dark" role="presentation"></div>
+        <ul role="list" class="divide-y" style="border-color: hsl(var(--rule-dark));">
+          {levels.map((row) => (
+            <li
+              class="grid grid-cols-[3.5rem_1fr] md:grid-cols-[4.5rem_10rem_1fr] gap-x-4 md:gap-x-8 gap-y-2 py-6 border-b"
+              style="border-color: hsl(var(--rule-dark));"
+            >
+              <p
+                class="font-mono text-[15px] md:text-[16px] tracking-[0.04em] text-[hsl(35_26%_64%)] leading-tight"
+                data-figures="tabular"
+              >
+                {row.level}
+              </p>
+              <p
+                class="col-span-1 md:col-span-1 font-sans text-[14px] md:text-[15px] font-medium text-ink-on-dark leading-tight"
+                data-figures="tabular"
+              >
+                {row.role}
+              </p>
+              <p
+                class="col-start-2 md:col-start-3 font-sans text-[14px] md:text-[14.5px] leading-[1.55] text-ink-muted-on-dark text-pretty"
+              >
+                {row.description}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </Container>
+</section>

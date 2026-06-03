@@ -1,0 +1,33 @@
+---
+/**
+ * Security page hero. Editorial parchment ground (NOT dark).
+ * Reads like the title page of a private bank's security colophon.
+ */
+import Container from "@components/Container.astro";
+---
+
+<section
+  class="relative isolate overflow-hidden bg-surface-page pt-16 md:pt-24 lg:pt-32 pb-20 md:pb-28"
+  aria-labelledby="security-hero-title"
+>
+  <Container class="relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-6 lg:gap-x-12">
+      <div class="lg:col-span-10 lg:col-start-1">
+        <p class="section-eyebrow">Security</p>
+        <h1
+          id="security-hero-title"
+          class="font-display font-normal text-display-xl text-surface-navy leading-[1.04] tracking-[-0.005em] text-balance"
+          style='font-variation-settings: "opsz" 144;'
+        >
+          Security for the work that matters most.
+        </h1>
+      </div>
+
+      <div class="lg:col-span-9 lg:col-start-1">
+        <p class="mt-6 lg:mt-8 text-[19px] md:text-[21px] leading-[1.55] text-ink-muted text-pretty">
+          Heritage Vault is built to the security posture a fiduciary firm requires of any vendor handling its families' documents. The specifics below are what a compliance officer needs to see.
+        </p>
+      </div>
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,49 @@
+---
+/**
+ * Stock-image editorial block, the partner-firms / design-partner section.
+ * Two-column: editorial photo on the left, copy on the right.
+ *
+ * Photo IDs per the brand-allowed list (Unsplash, hot-linked via RemoteImage):
+ *   - primary:   photo-1521791136064-7986c2920216 (two professionals reviewing a document)
+ *   - fallback:  photo-1554224155-1696413565d3 (architectural / archival)
+ */
+import Section from "@components/Section.astro";
+import RemoteImage from "@components/RemoteImage.astro";
+---
+
+<Section background="page" width="default" padding="loose" id="partner-firms">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+    <div class="lg:col-span-6 lg:col-start-1">
+      <RemoteImage
+        photoId="photo-1521791136064-7986c2920216"
+        alt="Two professionals reviewing a document together"
+        aspect="landscape"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="lg:col-span-5 lg:col-start-8">
+      <p class="section-eyebrow">Partner firms</p>
+      <h2
+        class="font-display font-normal text-display-lg text-surface-navy leading-[1.08] tracking-[-0.005em] text-balance"
+        style='font-variation-settings: "opsz" 144;'
+      >
+        Built alongside the firms using it.
+      </h2>
+
+      <div class="mt-8 space-y-5 text-[1.0625rem] leading-[1.7] text-ink text-pretty max-w-[36rem]">
+        <p>
+          Heritage Vault runs a design-partner program for the first cohort of licensed firms. Six to ten firms, all serving UHNW families, all using Vault on live client books.
+        </p>
+        <p>
+          The roadmap is set against real engagements, not focus-group transcripts. A design-partner firm sees the next surface before it ships, weighs in on the workflow, and helps decide what gets prioritized.
+        </p>
+        <p>
+          Pilots open quarterly. Selection is by fit and by capacity, not by order of inquiry.
+        </p>
+      </div>
+
+      {/* placeholder: specific firm logos to be supplied per brief §11 */}
+    </div>
+  </div>
+</Section>

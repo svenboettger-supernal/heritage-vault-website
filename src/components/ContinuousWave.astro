@@ -1,0 +1,73 @@
+---
+/**
+ * Heritage's signature continuous-wave motion ornament.
+ * Three layered soft fill paths, infinite translate, only behind hero panels.
+ * Respects prefers-reduced-motion.
+ *
+ * Per brand prompt: never as a single stroked line, never at high contrast against text,
+ * never in body sections.
+ */
+export interface Props {
+  /** Color treatment for the wave. */
+  tone?: "on-dark" | "on-light";
+  class?: string;
+}
+const { tone = "on-dark", class: className = "" } = Astro.props;
+
+const gradStop1 = tone === "on-dark" ? "#3B5275" : "#1E3A5F";
+const gradStop2 = tone === "on-dark" ? "#3B5275" : "#1E3A5F";
+const opacityScale = tone === "on-dark" ? 1 : 0.4;
+---
+
+<div class:list={["wave-bg absolute inset-0 overflow-hidden pointer-events-none", className]} aria-hidden="true">
+  <svg viewBox="0 0 1440 600" preserveAspectRatio="none" role="presentation" class="w-full h-full block">
+    <defs>
+      <linearGradient id="waveGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color={gradStop1} stop-opacity="0" />
+        <stop offset="60%" stop-color={gradStop2} stop-opacity={0.20 * opacityScale} />
+        <stop offset="100%" stop-color={gradStop2} stop-opacity={0.35 * opacityScale} />
+      </linearGradient>
+      <filter id="waveSoft" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="14" />
+      </filter>
+    </defs>
+    <g filter="url(#waveSoft)">
+      <path
+        class="wave wave--a"
+        fill="url(#waveGrad)"
+        opacity="0.7"
+        d="M-1440,360 C-1080,320 -720,400 -360,360 C0,320 360,400 720,360 C1080,320 1440,400 1800,360 C2160,320 2520,400 2880,360 L2880,600 L-1440,600 Z"
+      />
+      <path
+        class="wave wave--b"
+        fill="url(#waveGrad)"
+        opacity="0.5"
+        d="M-1440,420 C-1080,380 -720,460 -360,420 C0,380 360,460 720,420 C1080,380 1440,460 1800,420 C2160,380 2520,460 2880,420 L2880,600 L-1440,600 Z"
+      />
+      <path
+        class="wave wave--c"
+        fill="url(#waveGrad)"
+        opacity="0.35"
+        d="M-1440,490 C-1080,450 -720,530 -360,490 C0,450 360,530 720,490 C1080,450 1440,530 1800,490 C2160,450 2520,530 2880,490 L2880,600 L-1440,600 Z"
+      />
+    </g>
+  </svg>
+</div>
+
+<style>
+  .wave {
+    animation: wave-flow linear infinite;
+    transform-origin: 0 0;
+    will-change: transform;
+  }
+  .wave--a { animation-duration: 28s; }
+  .wave--b { animation-duration: 44s; animation-direction: reverse; }
+  .wave--c { animation-duration: 62s; }
+  @keyframes wave-flow {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-720px, 0, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wave { animation: none; }
+  }
+</style>

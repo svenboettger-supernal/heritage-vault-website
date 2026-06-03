@@ -1,0 +1,133 @@
+---
+/**
+ * The PDF deliverable section — what families actually receive.
+ * Row of 4 portrait-aspect thumbnails representing different pages of the export.
+ *
+ * Built locally (not via PlaceholderScreenshot) because that component's
+ * "browser chrome" treatment is wrong for a paper-output thumbnail. These
+ * are print pages, not screens.
+ */
+import Container from "@components/Container.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+
+const pages = [
+  {
+    eyebrow: "Cover",
+    title: "Estate Plan",
+    caption: "Branded to your firm.",
+    body: "lines-cover",
+  },
+  {
+    eyebrow: "Table of contents",
+    title: "Contents",
+    caption: "The five surfaces, ordered.",
+    body: "lines-toc",
+  },
+  {
+    eyebrow: "Asset Schedule",
+    title: "Schedule A",
+    caption: "Schedules A, B, C with totals.",
+    body: "lines-table",
+  },
+  {
+    eyebrow: "Distribution Chart",
+    title: "Generational waterfall",
+    caption: "Per-beneficiary outcomes.",
+    body: "lines-chart",
+  },
+];
+---
+
+<section class="bg-surface-page py-24 md:py-32" aria-label="The deliverable">
+  <Container width="default">
+    <SectionTitle
+      eyebrow="The deliverable"
+      heading="What your family receives."
+      subheading="A cover, an organized table of contents, and the five surfaces rendered for print. Branded to your firm, not ours."
+    />
+
+    <div class="mt-16 md:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      {pages.map((page, idx) => (
+        <figure class="flex flex-col" aria-label={`${page.eyebrow} page placeholder`}>
+          <div
+            class="relative aspect-[3/4] bg-surface-card border border-rule rounded-md shadow-elevated overflow-hidden"
+          >
+            {/* paper texture — extremely subtle vertical gradient */}
+            <div
+              aria-hidden="true"
+              class="absolute inset-0"
+              style="background: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(214 47% 98%) 100%);"
+            ></div>
+
+            {/* Page number, top right, mono */}
+            <span
+              class="absolute top-3 right-4 font-mono text-[9px] tracking-[0.18em] uppercase text-ink-muted"
+              data-figures="tabular"
+            >
+              {String(idx + 1).padStart(2, "0")}
+            </span>
+
+            {/* Synthetic content sketch */}
+            <div class="relative h-full w-full p-5 flex flex-col">
+              <span class="font-mono text-[9px] tracking-[0.18em] uppercase text-bronze">{page.eyebrow}</span>
+              <span class="mt-3 font-display text-[14px] leading-tight text-surface-navy" style='font-variation-settings: "opsz" 24;'>
+                {page.title}
+              </span>
+
+              {/* Distinct body sketch per page type */}
+              {page.body === "lines-cover" && (
+                <div class="mt-auto pb-4 space-y-2" aria-hidden="true">
+                  <div class="h-px bg-bronze w-1/2"></div>
+                  <div class="h-2 bg-ink-muted/15 rounded w-3/5"></div>
+                  <div class="h-2 bg-ink-muted/15 rounded w-1/2"></div>
+                </div>
+              )}
+              {page.body === "lines-toc" && (
+                <div class="mt-5 space-y-2" aria-hidden="true">
+                  {Array.from({ length: 5 }).map(() => (
+                    <div class="flex items-center justify-between gap-2">
+                      <div class="h-2 bg-ink-muted/20 rounded flex-1"></div>
+                      <div class="h-px bg-rule flex-[2]"></div>
+                      <div class="h-2 bg-ink-muted/20 rounded w-4"></div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {page.body === "lines-table" && (
+                <div class="mt-5 space-y-[6px]" aria-hidden="true">
+                  {Array.from({ length: 7 }).map(() => (
+                    <div class="flex items-center justify-between gap-2 pb-[6px] border-b border-rule">
+                      <div class="h-2 bg-ink-muted/20 rounded w-2/5"></div>
+                      <div class="h-2 bg-surface-navy/40 rounded w-1/4"></div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {page.body === "lines-chart" && (
+                <div class="mt-5 flex-1 flex flex-col gap-2" aria-hidden="true">
+                  <div class="h-2 bg-ink-muted/15 rounded w-3/4"></div>
+                  <div class="mt-1 flex-1 grid grid-cols-3 gap-2 items-end">
+                    <div class="bg-surface-navy/70 rounded-t-sm h-[60%]"></div>
+                    <div class="bg-surface-navy/55 rounded-t-sm h-[80%]"></div>
+                    <div class="bg-surface-navy/40 rounded-t-sm h-[45%]"></div>
+                  </div>
+                  <div class="flex items-center justify-between text-[8px] font-mono text-ink-muted">
+                    <span>G1</span><span>G2</span><span>G3</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          <figcaption class="mt-4">
+            <span class="font-sans text-[13px] font-medium text-surface-navy block">{page.eyebrow}</span>
+            <span class="font-sans text-[12px] text-ink-muted block mt-1">{page.caption}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <p class="mt-12 text-center text-[14px] text-ink-muted max-w-screen-prose mx-auto">
+      Exported as a single PDF. The family reads on paper or on screen. The firm keeps the editable workspace.
+    </p>
+  </Container>
+</section>

@@ -1,0 +1,60 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Section from "@components/Section.astro";
+import Eyebrow from "@components/Eyebrow.astro";
+import Heading from "@components/Heading.astro";
+import Prose from "@components/Prose.astro";
+---
+
+<Layout
+  title="Accessibility Statement"
+  description="Heritage Vault accessibility commitment."
+  pathname="/accessibility/"
+>
+  <Section width="prose" padding="loose">
+    <header class="mb-16">
+      <Eyebrow class="mb-6">LEGAL</Eyebrow>
+      <Heading size="display-md" as="h1">Accessibility Statement</Heading>
+      <p
+        class="mt-6 font-sans text-[12px] text-ink-muted"
+        style="font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1;"
+      >
+        Effective: 2026-06-03.
+      </p>
+    </header>
+
+    <Prose>
+      <h2>Our commitment</h2>
+      <p>
+        Heritage Vault aims to conform to WCAG 2.2 Level AA on every public page and Level AAA where possible on body content. The platform itself (the licensed software) is audited annually against WCAG 2.2 AA.
+      </p>
+
+      <h2>What we've done on this site</h2>
+      <p>
+        Semantic HTML, keyboard navigation throughout, sufficient color contrast on body text, visible focus indicators (Reserved Blue, 2px), alt text on every meaningful image, no autoplay media, no scroll-jacking, skip-to-content link, sensible heading hierarchy, motion preferences honored via <code>prefers-reduced-motion</code>.
+      </p>
+
+      <h2>The single piece of motion</h2>
+      <p>
+        Heritage Vault carries one decorative motion element, a continuous wave behind the hero panel. It is paused automatically when the visitor has requested reduced motion.
+      </p>
+
+      <h2>Known limitations</h2>
+      <p>
+        Some embedded third-party content (when added: scheduling tools, PDF viewers, video embeds) may not fully meet WCAG 2.2 AA. Heritage Vault works to remediate as alternatives become available.
+      </p>
+
+      <h2>Contact for accessibility issues</h2>
+      <p>
+        If a visitor encounters a barrier on this site, email
+        {" "}<a href="mailto:accessibility@heritagevault.com">accessibility@heritagevault.com</a>
+        {" "}or write to the team via the Request Access form. Heritage Vault responds within two business days.
+      </p>
+
+      <h2>Continuous improvement</h2>
+      <p>
+        Heritage Vault reviews accessibility quarterly and updates this statement as the site evolves.
+      </p>
+    </Prose>
+  </Section>
+</Layout>

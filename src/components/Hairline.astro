@@ -1,0 +1,15 @@
+---
+export interface Props {
+  kind?: "bronze" | "warm-rule" | "on-dark";
+  class?: string;
+}
+const { kind = "warm-rule", class: className = "" } = Astro.props;
+
+const map: Record<NonNullable<Props["kind"]>, string> = {
+  bronze: "hairline-bronze",
+  "warm-rule": "rule",
+  "on-dark": "rule",
+};
+---
+
+<div aria-hidden="true" class:list={[map[kind], className]}></div>

@@ -1,0 +1,83 @@
+---
+/**
+ * Product page — walks the visitor through Heritage Vault end to end.
+ * Editorial, hi-fi, private-bank annual-report cadence.
+ *
+ * Section spine (per brief §7.2):
+ *   1. Hero (editorial, light, NOT a navy panel)
+ *   2. Workflow ribbon — Upload → Extract → Review → Build → Deliver
+ *   3. Five surfaces deep-dive (alternating left/right, alternating surface)
+ *   4. Source traceability (the differentiator — second navy inset on this page)
+ *   5. The PDF deliverable
+ *   6. The eight document types
+ *   7. Video walkthrough
+ *   8. Closing CTA band
+ */
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Hairline from "@components/Hairline.astro";
+
+import Hero from "@components/pages/product/Hero.astro";
+import WorkflowRibbon from "@components/pages/product/WorkflowRibbon.astro";
+import SurfaceSection from "@components/pages/product/SurfaceSection.astro";
+import SourceTraceability from "@components/pages/product/SourceTraceability.astro";
+import PdfOutput from "@components/pages/product/PdfOutput.astro";
+import DocumentGrid from "@components/pages/product/DocumentGrid.astro";
+import VideoWalkthrough from "@components/pages/product/VideoWalkthrough.astro";
+import CtaBand from "@components/pages/product/CtaBand.astro";
+
+const surfaces = (await getCollection("surfaces")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const totalSurfaces = surfaces.length;
+---
+
+<Layout
+  title="Product, Heritage Vault"
+  description="Walk Heritage Vault end to end. Upload, extract, review, build, deliver. Five surfaces of an estate plan, in one workspace."
+  pathname="/product/"
+>
+  <Hero />
+
+  <WorkflowRibbon />
+
+  {/* The spine of the page — one section per surface, alternating side + background.
+      A quiet warm-rule appears between consecutive light surfaces; the dark
+      contrast inset (surface 4) is its own break. */}
+  {surfaces.map((surface, idx) => {
+    const next = surfaces[idx + 1];
+    const currentIsDark = surface.data.order === 4;
+    const nextIsDark = next?.data.order === 4;
+    const showRule = next && !currentIsDark && !nextIsDark;
+    return (
+      <>
+        <SurfaceSection
+          slug={surface.slug}
+          order={surface.data.order}
+          name={surface.data.name}
+          summary={surface.data.summary}
+          capabilities={surface.data.capabilities}
+          whyItMatters={surface.data.whyItMatters}
+          total={totalSurfaces}
+        />
+        {showRule && (
+          <div class="bg-surface-page">
+            <div class="mx-auto max-w-screen-default px-6 sm:px-8 lg:px-12">
+              <Hairline kind="warm-rule" />
+            </div>
+          </div>
+        )}
+      </>
+    );
+  })}
+
+  <SourceTraceability />
+
+  <PdfOutput />
+
+  <DocumentGrid />
+
+  <VideoWalkthrough />
+
+  <CtaBand />
+</Layout>

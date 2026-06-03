@@ -1,0 +1,57 @@
+---
+import Section from "@components/Section.astro";
+import RemoteImage from "@components/RemoteImage.astro";
+---
+
+<Section background="page" width="wide" padding="loose" id="the-origin">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+    <div class="order-2 lg:order-1">
+      <div class="overflow-hidden rounded">
+        <RemoteImage
+          photoId="photo-1568992687947-868a62a9f521"
+          alt="Library interior, leather-bound estate-planning volumes"
+          aspect="landscape"
+          width={1400}
+          crop="entropy"
+        />
+      </div>
+    </div>
+
+    <div class="order-1 lg:order-2 max-w-prose">
+      <p class="section-eyebrow">The origin</p>
+
+      <h2
+        class="font-display text-balance text-[clamp(2rem,3.6vw,3rem)] leading-[1.08] tracking-[-0.005em] text-surface-navy"
+        style='font-variation-settings: "opsz" 144;'
+      >
+        Built on a 15-year methodology, not a thesis.
+      </h2>
+
+      <div class="mt-8 space-y-5 text-[1.0625rem] leading-[1.65] text-ink">
+        <p>
+          Heritage Vault was built by Heritage Strategies, the New York multi-family office that has produced these plans manually since 2009.
+        </p>
+        <p>
+          The Approach Book the firm produces by hand for every family is the artifact Heritage Vault digitizes. Refined across thousands of ultra-high-net-worth engagements, the methodology arrived before the software.
+        </p>
+        <p>
+          The platform is the firm's working practice, made portable for peers who work at the same level of complexity.
+        </p>
+      </div>
+
+      <p class="mt-10">
+        <a
+          href="https://heritagesllc.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-[14px] font-medium tracking-[0.02em] text-surface-navy"
+        >
+          Read the firm's story
+          <svg width="13" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M1 5h12M9 1l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </p>
+    </div>
+  </div>
+</Section>

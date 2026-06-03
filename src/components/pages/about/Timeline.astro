@@ -1,0 +1,121 @@
+---
+/**
+ * Timeline — the methodology arc. Horizontal on desktop with hairline pip
+ * dots in navy (NOT bronze fill) and tabular-figure years; vertical stack
+ * on mobile with a left bronze hairline rail. Per master plan: reads as
+ * a calm arc, not a marketing infographic.
+ */
+import Section from "@components/Section.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+
+const milestones = [
+  {
+    year: "2009",
+    heading: "The firm is founded.",
+    body: "Heritage Strategies LLC opens in New York. The first Approach Book is produced for a single UHNW family.",
+  },
+  {
+    year: "2014",
+    heading: "The methodology is codified.",
+    body: "After 100+ family engagements, the five-surface structure stabilizes as the firm's standard production format.",
+  },
+  {
+    year: "2019",
+    heading: "Two hundred books delivered.",
+    body: "The practice crosses 200 multi-generational client books. Every one assembled by hand, family by family.",
+  },
+  {
+    year: "2024",
+    heading: "Internal automation pilot begins.",
+    body: "The firm's own production team becomes the first user of a software version of the Approach Book.",
+  },
+  {
+    year: "2026",
+    heading: "Heritage Vault launches.",
+    body: "The internal tool is productized and opened to partner firms serving the same kind of families.",
+  },
+];
+---
+
+<Section background="page" width="wide" padding="loose" id="timeline">
+  <SectionTitle
+    eyebrow="The arc"
+    heading="Fifteen years of practice, two years of platform."
+    subheading="Heritage Strategies built the methodology. Heritage Vault is making it portable."
+    class="mb-16 md:mb-20"
+  />
+
+  {/* Desktop, horizontal */}
+  <ol class="hidden lg:grid grid-cols-5 gap-0 items-start" aria-label="Heritage Vault methodology timeline">
+    {milestones.map((m, i) => (
+      <li class="relative px-5 xl:px-7">
+        {/* Connecting hairline between pips */}
+        {i < milestones.length - 1 && (
+          <span
+            aria-hidden="true"
+            class="absolute top-[7px] left-[calc(50%+10px)] right-[-50%] h-px bg-rule"
+          ></span>
+        )}
+
+        {/* Pip dot — hairline navy ring, no bronze fill */}
+        <span
+          aria-hidden="true"
+          class="block w-[14px] h-[14px] rounded-full border border-surface-navy bg-surface-page"
+        ></span>
+
+        <p
+          class="mt-6 font-mono text-[13px] tracking-[0.08em] text-bronze"
+          data-figures="tabular"
+        >
+          {m.year}
+        </p>
+
+        <h3
+          class="mt-3 font-display text-[1.375rem] xl:text-[1.5rem] leading-[1.2] tracking-[-0.005em] text-surface-navy text-balance"
+          style='font-variation-settings: "opsz" 60;'
+        >
+          {m.heading}
+        </h3>
+
+        <p class="mt-3 text-[14px] leading-[1.55] text-ink-muted max-w-[22ch]">
+          {m.body}
+        </p>
+      </li>
+    ))}
+  </ol>
+
+  {/* Mobile / tablet, vertical with bronze hairline rail */}
+  <ol class="lg:hidden relative pl-8" aria-label="Heritage Vault methodology timeline">
+    {/* Left bronze hairline rail */}
+    <span
+      aria-hidden="true"
+      class="absolute left-[6px] top-2 bottom-2 w-px bg-bronze opacity-60"
+    ></span>
+
+    {milestones.map((m) => (
+      <li class="relative pb-12 last:pb-0">
+        {/* Pip dot on rail */}
+        <span
+          aria-hidden="true"
+          class="absolute -left-8 top-1.5 w-[13px] h-[13px] rounded-full border border-surface-navy bg-surface-page"
+        ></span>
+
+        <p
+          class="font-mono text-[13px] tracking-[0.08em] text-bronze"
+          data-figures="tabular"
+        >
+          {m.year}
+        </p>
+        <h3
+          class="mt-2 font-display text-[1.375rem] leading-[1.2] tracking-[-0.005em] text-surface-navy text-balance"
+          style='font-variation-settings: "opsz" 60;'
+        >
+          {m.heading}
+        </h3>
+        <p class="mt-3 text-[14px] leading-[1.6] text-ink-muted max-w-[40ch]">
+          {m.body}
+        </p>
+      </li>
+    ))}
+  </ol>
+</Section>

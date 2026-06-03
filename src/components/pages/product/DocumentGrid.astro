@@ -1,0 +1,46 @@
+---
+/**
+ * The eight document types, parsed correctly.
+ * Wealth.com-pattern stacked cards: 4×2 grid (responsive: 2 cols mobile, 4 cols desktop).
+ * Each card: mono eyebrow, display-sm doc name, Inter summary. Subtle, on bg-surface-card.
+ */
+import { getCollection } from "astro:content";
+import Container from "@components/Container.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+
+const documents = (await getCollection("documents")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<section class="bg-surface-muted py-24 md:py-32" aria-label="Documents ingested">
+  <Container width="default">
+    <SectionTitle
+      eyebrow="Documents ingested"
+      heading="Eight document types, parsed correctly."
+      subheading="Vault reads what an estate planning analyst reads, structured the way an analyst structures it."
+    />
+
+    <div class="mt-16 md:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      {documents.map((doc) => (
+        <article class="bg-surface-card border border-rule rounded-md p-6 md:p-7 h-full flex flex-col">
+          <p
+            class="font-mono text-[11px] tracking-[0.18em] uppercase text-bronze"
+            data-figures="tabular"
+          >
+            Doc type {String(doc.data.order).padStart(2, "0")}
+          </p>
+          <h3
+            class="mt-4 font-display font-normal text-display-sm leading-[1.18] text-surface-navy text-balance"
+            style='font-variation-settings: "opsz" 24;'
+          >
+            {doc.data.name}
+          </h3>
+          <p class="mt-4 text-[14px] leading-[1.6] text-ink text-pretty">
+            {doc.data.summary}
+          </p>
+        </article>
+      ))}
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,50 @@
+---
+import Container from "@components/Container.astro";
+import Button from "@components/Button.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<section
+  class="relative isolate overflow-hidden bg-surface-navy text-ink-on-dark on-dark"
+  aria-labelledby="closing-cta-title"
+>
+  {/* Quiet dotted-grid texture, the only sanctioned decorative texture besides the wave */}
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 pointer-events-none opacity-[0.08]"
+    style="background-image: radial-gradient(hsl(44 36% 93%) 1px, transparent 1px); background-size: 28px 28px;"
+  ></div>
+
+  <Container width="wide" class="relative z-10 py-24 md:py-36">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
+      <div class="lg:col-span-8">
+        <p class="section-eyebrow">For partner firms</p>
+
+        <h2
+          id="closing-cta-title"
+          class="font-display font-normal text-balance leading-[1.05] tracking-[-0.005em] text-ink-on-dark text-[clamp(2.5rem,5.6vw,4.5rem)]"
+          style='font-variation-settings: "opsz" 144;'
+        >
+          Join the firms that plan for <em class="italic font-normal text-[hsl(44_36%_96%)]">every tomorrow.</em>
+        </h2>
+
+        <p class="mt-8 max-w-prose text-[1.0625rem] leading-[1.6] text-ink-muted-on-dark">
+          Heritage Vault is opening pilots with a small set of partner firms. A single named operations owner, real client documents, and a 30-day review cadence are the commitments. The platform brings the methodology.
+        </p>
+      </div>
+
+      <div class="lg:col-span-4 flex flex-col items-start lg:items-end gap-5">
+        <Button href={`${base}/request-access/`} variant="ghost-on-dark" size="lg" arrow>
+          Request access
+        </Button>
+        <a
+          href={`${base}/product/`}
+          class="text-[13px] text-ink-muted-on-dark hover:text-ink-on-dark border-b border-rule-dark hover:border-ink-on-dark transition-colors duration-fast"
+        >
+          Or watch a 90-second tour
+        </a>
+      </div>
+    </div>
+  </Container>
+</section>

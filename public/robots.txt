@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://svenboettger-supernal.github.io/heritage-vault-website/sitemap-index.xml

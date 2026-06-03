@@ -1,0 +1,42 @@
+---
+import Container from "@components/Container.astro";
+
+export interface Props {
+  background?: "page" | "card" | "muted" | "navy" | "dark";
+  width?: "narrow" | "prose" | "default" | "wide";
+  padding?: "tight" | "default" | "loose" | "none";
+  as?: string;
+  class?: string;
+  id?: string;
+}
+
+const {
+  background = "page",
+  width = "default",
+  padding = "default",
+  as: Tag = "section",
+  class: className = "",
+  id,
+} = Astro.props;
+
+const bgClass: Record<NonNullable<Props["background"]>, string> = {
+  page: "bg-surface-page text-ink",
+  card: "bg-surface-card text-ink",
+  muted: "bg-surface-muted text-ink",
+  navy: "bg-surface-navy text-ink-on-dark on-dark",
+  dark: "bg-surface-dark text-ink-on-dark on-dark",
+};
+
+const padClass: Record<NonNullable<Props["padding"]>, string> = {
+  none: "",
+  tight: "py-12 md:py-16",
+  default: "py-20 md:py-28",
+  loose: "py-28 md:py-40",
+};
+---
+
+<Tag id={id} class:list={[bgClass[background], padClass[padding], className]}>
+  <Container width={width}>
+    <slot />
+  </Container>
+</Tag>

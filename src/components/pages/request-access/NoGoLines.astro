@@ -1,0 +1,53 @@
+---
+/**
+ * NoGoLines — explicit "what we don't do" block per brief §7.6.
+ * The calm-tone differentiator. Mono "—" prefix on each card.
+ * Four cards in a 2x2 grid on cool near-white.
+ */
+import Container from "@components/Container.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+
+const noGo = [
+  {
+    headline: "We do not run paid acquisition.",
+    body: "We do not chase low-intent leads.",
+  },
+  {
+    headline: "We do not call without permission.",
+    body: "A first conversation happens by mutual scheduling.",
+  },
+  {
+    headline: "We do not share your firm with anyone.",
+    body: "Inbound stays inside the Heritage Vault team until you ask us to bring others in.",
+  },
+  {
+    headline: "We do not auto-add you to a drip sequence.",
+    body: "If you want to hear from us again, you ask.",
+  },
+];
+---
+
+<section class="bg-surface-page py-20 md:py-24 lg:py-28" aria-labelledby="no-go-heading">
+  <Container width="default">
+    <SectionTitle
+      eyebrow="What we do not do"
+      heading="How Heritage Vault handles inbound."
+      subheading="We have explicit no-go lines, because the alternative is the standard fintech-marketing experience."
+      class="mb-14 md:mb-20"
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule border border-rule rounded overflow-hidden">
+      {noGo.map((item) => (
+        <article class="bg-surface-card p-8 md:p-10 flex flex-col gap-3">
+          <span aria-hidden="true" class="font-mono text-[18px] leading-none text-bronze">·</span>
+          <h3 class="font-display text-display-sm text-surface-navy leading-[1.2] tracking-[-0.005em] text-balance">
+            {item.headline}
+          </h3>
+          <p class="text-[15px] leading-[1.65] text-ink-muted text-pretty">
+            {item.body}
+          </p>
+        </article>
+      ))}
+    </div>
+  </Container>
+</section>

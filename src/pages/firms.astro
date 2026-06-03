@@ -1,0 +1,60 @@
+---
+/**
+ * /firms/, the For Firms page. Per brief §7.3.
+ * Editorial parchment hero, three "why license" blocks, comparison cards,
+ * engagement steps, partner commitments, Foreman block, partner-firms band,
+ * FAQ, closing CTA on dark.
+ */
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+
+import Hero from "@components/pages/firms/Hero.astro";
+import WhyLicense from "@components/pages/firms/WhyLicense.astro";
+import Comparison from "@components/pages/firms/Comparison.astro";
+import Engagement from "@components/pages/firms/Engagement.astro";
+import Commitments from "@components/pages/firms/Commitments.astro";
+import Foreman from "@components/pages/firms/Foreman.astro";
+import PartnerFirms from "@components/pages/firms/PartnerFirms.astro";
+import ClosingCTA from "@components/pages/firms/ClosingCTA.astro";
+
+import Section from "@components/Section.astro";
+import FAQ from "@components/FAQ.astro";
+
+// Pull firms-scoped FAQs plus the two global FAQs (Foreman + Heritage Strategies).
+const firmsFaqs = await getCollection("faqs", ({ data }) => data.page === "firms");
+const globalFaqs = await getCollection("faqs", ({ data }) => data.page === "global");
+
+const faqItems = [...firmsFaqs, ...globalFaqs]
+  .sort((a, b) => {
+    // firms entries first, then global; within group by `order`
+    if (a.data.page === b.data.page) return a.data.order - b.data.order;
+    return a.data.page === "firms" ? -1 : 1;
+  })
+  .map((entry) => ({ question: entry.data.question, answer: entry.data.answer }));
+---
+
+<Layout
+  title="For Firms, Heritage Vault"
+  description="Heritage Vault is a firm-level license for estate-planning firms serving high-net-worth families. Your team controls the engagement, your brand controls the deliverable."
+  pathname="/firms/"
+>
+  <Hero />
+  <WhyLicense />
+  <Comparison />
+  <Engagement />
+  <Commitments />
+  <Foreman />
+  <PartnerFirms />
+
+  <Section background="muted" width="default" padding="loose" id="faq">
+    <FAQ
+      layout="two-column"
+      eyebrow="Questions"
+      heading="Questions firms ask."
+      subheading="If yours is not here, ask on the access call."
+      items={faqItems}
+    />
+  </Section>
+
+  <ClosingCTA />
+</Layout>

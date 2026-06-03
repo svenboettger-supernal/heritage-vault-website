@@ -1,0 +1,77 @@
+---
+/**
+ * Accessible tabs primitive (Wealth.com-style for segment selection + surfaces deep-dive).
+ * Each tab corresponds to a panel inside a <slot> by the same key.
+ * Client-side JS toggles aria-selected + display.
+ */
+export interface Props {
+  tabs: Array<{ key: string; label: string }>;
+  /** Initial active tab key. */
+  defaultKey?: string;
+  ariaLabel: string;
+  class?: string;
+}
+const { tabs, defaultKey, ariaLabel, class: className = "" } = Astro.props;
+const active = defaultKey ?? tabs[0]?.key;
+---
+
+<div class:list={["w-full", className]} data-tabs>
+  <div role="tablist" aria-label={ariaLabel} class="flex flex-wrap items-end gap-x-8 gap-y-4 border-b border-rule">
+    {tabs.map((tab) => (
+      <button
+        type="button"
+        role="tab"
+        id={`tab-${tab.key}`}
+        aria-controls={`panel-${tab.key}`}
+        aria-selected={tab.key === active ? "true" : "false"}
+        data-tab-key={tab.key}
+        class:list={[
+          "pb-4 pt-2 text-[14px] font-medium tracking-nav uppercase transition-colors duration-fast border-b-2 -mb-px",
+          tab.key === active
+            ? "text-surface-navy border-state-blue"
+            : "text-ink-muted border-transparent hover:text-surface-navy",
+        ]}
+      >
+        {tab.label}
+      </button>
+    ))}
+  </div>
+
+  <div class="pt-12">
+    <slot />
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-tabs]").forEach((tabsEl) => {
+    const tablist = tabsEl.querySelector<HTMLElement>('[role="tablist"]');
+    const buttons = tabsEl.querySelectorAll<HTMLButtonElement>('[role="tab"]');
+    const panels = tabsEl.querySelectorAll<HTMLElement>('[role="tabpanel"]');
+
+    function select(key: string) {
+      buttons.forEach((b) => {
+        const isActive = b.dataset.tabKey === key;
+        b.setAttribute("aria-selected", String(isActive));
+        b.classList.toggle("text-surface-navy", isActive);
+        b.classList.toggle("border-state-blue", isActive);
+        b.classList.toggle("text-ink-muted", !isActive);
+        b.classList.toggle("border-transparent", !isActive);
+      });
+      panels.forEach((p) => {
+        const id = p.id.replace(/^panel-/, "");
+        p.hidden = id !== key;
+      });
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const k = btn.dataset.tabKey;
+        if (k) select(k);
+      });
+    });
+
+    // Set initial state from the markup
+    const initial = tabsEl.querySelector<HTMLButtonElement>('[aria-selected="true"]')?.dataset.tabKey;
+    if (initial) select(initial);
+  });
+</script>

@@ -1,0 +1,138 @@
+---
+/**
+ * One surface entry on the Product page.
+ * Two-column 50/50 layout, alternating side per `order`.
+ * Background selected per surface for visual rhythm (page → card → dark → page → card).
+ * One of the five (surface 4 / Flow Diagram) sits on bg-surface-dark as a contrast inset.
+ *
+ * `id` is set to the slug so anchor links from elsewhere on the site work.
+ */
+import Container from "@components/Container.astro";
+import PlaceholderScreenshot from "@components/PlaceholderScreenshot.astro";
+
+export interface Props {
+  slug: string;
+  order: number;
+  name: string;
+  summary: string;
+  capabilities: string[];
+  whyItMatters: string;
+  total: number;
+}
+
+const { slug, order, name, summary, capabilities, whyItMatters, total } = Astro.props;
+
+const imageLeft = order % 2 === 1;
+
+// Background rhythm: 1 page, 2 card, 3 page, 4 dark, 5 card
+const bgByOrder: Record<number, "page" | "card" | "muted" | "dark"> = {
+  1: "page",
+  2: "card",
+  3: "page",
+  4: "dark",
+  5: "card",
+};
+const bg = bgByOrder[order] ?? "page";
+
+const bgClass: Record<"page" | "card" | "muted" | "dark", string> = {
+  page: "bg-surface-page text-ink",
+  card: "bg-surface-card text-ink",
+  muted: "bg-surface-muted text-ink",
+  dark: "bg-surface-dark text-ink-on-dark on-dark",
+};
+
+const onDark = bg === "dark";
+const headingClass = onDark ? "text-ink-on-dark" : "text-surface-navy";
+const summaryClass = onDark ? "text-ink-muted-on-dark" : "text-ink-muted";
+const orderLabel = `Surface ${String(order).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+
+const calloutBg = onDark ? "bg-surface-navy-card" : "bg-surface-muted";
+const calloutQuote = onDark ? "text-ink-on-dark" : "text-surface-navy";
+const calloutEyebrow = onDark ? "text-[hsl(35_26%_64%)]" : "text-bronze";
+---
+
+<section
+  id={slug}
+  class:list={["scroll-mt-24 py-20 md:py-28", bgClass[bg]]}
+  aria-labelledby={`${slug}-title`}
+>
+  <Container width="default">
+    <div
+      class:list={[
+        "grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-16 items-center",
+      ]}
+    >
+      {/* Screenshot column */}
+      <div
+        class:list={[
+          "lg:col-span-6",
+          imageLeft ? "lg:order-1" : "lg:order-2",
+        ]}
+      >
+        <PlaceholderScreenshot label={name} aspect="browser" />
+      </div>
+
+      {/* Copy column */}
+      <div
+        class:list={[
+          "lg:col-span-6",
+          imageLeft ? "lg:order-2" : "lg:order-1",
+        ]}
+      >
+        <p class:list={["font-mono text-[12px] tracking-[0.18em] uppercase mb-6", calloutEyebrow]} data-figures="tabular">
+          {orderLabel}
+        </p>
+        <h2
+          id={`${slug}-title`}
+          class:list={[
+            "font-display font-normal text-display-md leading-[1.1] tracking-[-0.005em] text-balance",
+            headingClass,
+          ]}
+          style='font-variation-settings: "opsz" 144;'
+        >
+          {name}
+        </h2>
+        <p class:list={["mt-6 text-[17px] md:text-[18px] leading-[1.6] text-pretty max-w-prose", summaryClass]}>
+          {summary}
+        </p>
+
+        {/* Capabilities — bronze · dot bullets, not list-disc */}
+        <ul class="mt-8 space-y-3" role="list">
+          {capabilities.map((cap) => (
+            <li class="relative flex gap-3 text-[15px] leading-[1.6]">
+              <span
+                aria-hidden="true"
+                class:list={[
+                  "select-none mt-[2px] font-mono leading-none",
+                  onDark ? "text-[hsl(35_26%_64%)]" : "text-bronze",
+                ]}
+              >
+                ·
+              </span>
+              <span class:list={[onDark ? "text-ink-on-dark" : "text-ink"]}>{cap}</span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Why it matters callout — left bronze hairline accent, tinted surface card */}
+        <aside
+          class:list={[
+            "mt-10 relative pl-6 pr-5 py-5 rounded",
+            calloutBg,
+          ]}
+        >
+          <span
+            aria-hidden="true"
+            class="absolute left-0 top-3 bottom-3 w-px bg-bronze"
+          ></span>
+          <p class:list={["font-mono text-[11px] tracking-[0.22em] uppercase mb-2", calloutEyebrow]}>
+            Why it matters
+          </p>
+          <p class:list={["font-display text-[18px] md:text-[19px] leading-[1.45] text-pretty", calloutQuote]} style='font-variation-settings: "opsz" 24;'>
+            {whyItMatters}
+          </p>
+        </aside>
+      </div>
+    </div>
+  </Container>
+</section>

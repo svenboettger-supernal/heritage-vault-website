@@ -1,0 +1,44 @@
+---
+/**
+ * AccessFaq — mini FAQ specific to the access process per brief §7.6.
+ * Four questions, inline (NOT pulled from the content collection — they are
+ * scoped to this page only).
+ */
+import Container from "@components/Container.astro";
+import FAQ from "@components/FAQ.astro";
+import SectionTitle from "@components/SectionTitle.astro";
+
+const items = [
+  {
+    question: "Is there a fee to request access?",
+    answer:
+      "No. Conversations are free. Licensing terms are shared on a call once we both know there is fit.",
+  },
+  {
+    question: "Do you offer trial accounts?",
+    answer:
+      "We don’t run unsupervised trials. A Heritage Vault engagement is a guided pilot with onboarding, training, and named support.",
+  },
+  {
+    question: "Can I get a recorded demo before talking to your team?",
+    answer:
+      "Yes. After your form submission we share a 12-minute walkthrough as part of the response.",
+  },
+  {
+    question: "What if my firm is smaller than the AUM bands listed?",
+    answer:
+      "Tell us anyway. Heritage Vault works with selected firms below the listed band as design partners.",
+  },
+];
+---
+
+<section class="bg-surface-card py-20 md:py-24 lg:py-28 border-t border-rule" aria-labelledby="access-faq-heading">
+  <Container width="default">
+    <SectionTitle
+      eyebrow="Common questions"
+      heading="Before you reach out."
+      class="mb-12 md:mb-16"
+    />
+    <FAQ items={items} layout="single" schema={false} />
+  </Container>
+</section>

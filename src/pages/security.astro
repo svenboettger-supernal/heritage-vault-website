@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Hairline from "@components/Hairline.astro";
+import Hero from "@components/pages/security/Hero.astro";
+import ComplianceStrip from "@components/pages/security/ComplianceStrip.astro";
+import ClaimSection from "@components/pages/security/ClaimSection.astro";
+import AccessLevels from "@components/pages/security/AccessLevels.astro";
+import QuietImage from "@components/pages/security/QuietImage.astro";
+import SecurityFAQ from "@components/pages/security/SecurityFAQ.astro";
+import ContactCTA from "@components/pages/security/ContactCTA.astro";
+
+const claims = (await getCollection("securityClaims")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const total = claims.length;
+---
+
+<Layout
+  title="Security · Heritage Vault"
+  description="The security posture a fiduciary firm requires of any vendor handling its families' documents. SOC 2 Type II in progress, US data residency, AES-256 at rest, TLS 1.3 in transit, annual third-party penetration testing."
+  pathname="/security/"
+>
+  <Hero />
+  <ComplianceStrip />
+
+  {claims.map((claim, idx) => (
+    <>
+      <ClaimSection
+        order={claim.data.order}
+        total={total}
+        title={claim.data.title}
+        summary={claim.data.summary}
+        bullets={claim.data.bullets}
+      />
+      {idx < claims.length - 1 && <Hairline kind="warm-rule" />}
+    </>
+  ))}
+
+  <AccessLevels />
+  <QuietImage />
+  <SecurityFAQ />
+  <ContactCTA />
+</Layout>
