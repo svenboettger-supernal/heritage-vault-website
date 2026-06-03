@@ -13,6 +13,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @property registration so the .btn-glow conic-gradient angle can animate
+   smoothly. Must live at the top level (not inside @layer). */
+@property --btn-glow-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 /* ---------- Heritage Vault brand tokens (direct port from heritage-brand reference repo) ---------- */
 :root {
   /* surfaces — cool near-white default, blue undertones (matches heritage-brand) */
@@ -236,6 +244,53 @@
   }
   .on-dark .eyebrow {
     color: hsl(35 26% 64%);
+  }
+
+  /* ===== Animated glossy stroke (.btn-glow) =====
+     Sweeps a thin highlight around the button perimeter on an infinite loop.
+     Built with a rotating conic-gradient layer + a mask that punches out a 1px
+     ring. Minimalistic, no color shift — just a slow, slow highlight.
+
+     The @property declaration lets us animate the conic-gradient's `from`
+     angle directly (supported in Chromium 85+, Safari 16.4+, Firefox 128+).
+     Browsers without @property support degrade silently to a static button. */
+  .btn-glow {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .btn-glow::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+      from var(--btn-glow-angle, 0deg),
+      transparent 0deg,
+      transparent 240deg,
+      hsl(214 80% 80%) 285deg,
+      hsl(0 0% 100%) 300deg,
+      hsl(214 80% 80%) 315deg,
+      transparent 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+            mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    animation: btn-glow-rotate 4.5s linear infinite;
+    opacity: 0.95;
+  }
+  @keyframes btn-glow-rotate {
+    to { --btn-glow-angle: 360deg; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-glow::before { animation: none; opacity: 0; }
   }
 
   /* Card surface */
