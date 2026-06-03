@@ -1,10 +1,12 @@
 ---
 /**
  * Heritage's signature continuous-wave motion ornament.
- * Multiple layered soft wave paths, infinite translate, only behind hero panels.
- * Tuned to match the heritage-brand brand-system demo at /heritage-brand/.
  *
- * Per brand prompt: never as a single stroked line, never as body decor,
+ * Direct port of the hero wave from svenboettger-supernal/heritage-brand.
+ * Two soft fill waves under two thin glowing sweep arcs, all drifting
+ * left at different speeds for an "always alive" atmosphere.
+ *
+ * Per brand prompt: never as a single stroked line, never in body sections,
  * always respects prefers-reduced-motion.
  */
 export interface Props {
@@ -14,105 +16,63 @@ export interface Props {
 const { tone = "on-dark", class: className = "" } = Astro.props;
 ---
 
-<div class:list={["wave-bg absolute inset-0 overflow-hidden pointer-events-none", className]} aria-hidden="true">
-  {tone === "on-dark" ? (
-    <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" role="presentation" class="w-full h-full block">
-      <defs>
-        <linearGradient id="wave-fill-dark" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#1E3A5F" stop-opacity="0" />
-          <stop offset="55%" stop-color="#3B6FA0" stop-opacity="0.18" />
-          <stop offset="100%" stop-color="#5B8FC0" stop-opacity="0.32" />
-        </linearGradient>
-        <linearGradient id="wave-stroke-dark" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#A8C0DE" stop-opacity="0" />
-          <stop offset="50%" stop-color="#A8C0DE" stop-opacity="0.45" />
-          <stop offset="100%" stop-color="#A8C0DE" stop-opacity="0" />
-        </linearGradient>
-        <filter id="wave-soft" x="-10%" y="-10%" width="120%" height="120%">
-          <feGaussianBlur stdDeviation="10" />
-        </filter>
-      </defs>
-
-      {/* Background fill waves — soft, blurred, drifting */}
-      <g filter="url(#wave-soft)">
-        <path
-          class="wave wave--a"
-          fill="url(#wave-fill-dark)"
-          opacity="0.85"
-          d="M-1440,420 C-1080,360 -720,480 -360,420 C0,360 360,480 720,420 C1080,360 1440,480 1800,420 C2160,360 2520,480 2880,420 L2880,700 L-1440,700 Z"
-        />
-        <path
-          class="wave wave--b"
-          fill="url(#wave-fill-dark)"
-          opacity="0.6"
-          d="M-1440,500 C-1080,440 -720,560 -360,500 C0,440 360,560 720,500 C1080,440 1440,560 1800,500 C2160,440 2520,560 2880,500 L2880,700 L-1440,700 Z"
-        />
-        <path
-          class="wave wave--c"
-          fill="url(#wave-fill-dark)"
-          opacity="0.4"
-          d="M-1440,580 C-1080,540 -720,620 -360,580 C0,540 360,620 720,580 C1080,540 1440,620 1800,580 C2160,540 2520,620 2880,580 L2880,700 L-1440,700 Z"
-        />
-      </g>
-
-      {/* Foreground stroke waves — the visible flowing arcs from the brand demo */}
-      <g>
-        <path
-          class="wave wave--stroke-1"
-          fill="none"
-          stroke="url(#wave-stroke-dark)"
-          stroke-width="1"
-          d="M-1440,380 C-1080,300 -720,460 -360,380 C0,300 360,460 720,380 C1080,300 1440,460 1800,380 C2160,300 2520,460 2880,380"
-        />
-        <path
-          class="wave wave--stroke-2"
-          fill="none"
-          stroke="url(#wave-stroke-dark)"
-          stroke-width="1"
-          opacity="0.6"
-          d="M-1440,460 C-1080,400 -720,530 -360,460 C0,400 360,530 720,460 C1080,400 1440,530 1800,460 C2160,400 2520,530 2880,460"
-        />
-        <path
-          class="wave wave--stroke-3"
-          fill="none"
-          stroke="url(#wave-stroke-dark)"
-          stroke-width="1"
-          opacity="0.4"
-          d="M-1440,540 C-1080,500 -720,590 -360,540 C0,500 360,590 720,540 C1080,500 1440,590 1800,540 C2160,500 2520,590 2880,540"
-        />
-      </g>
-    </svg>
-  ) : (
-    <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" role="presentation" class="w-full h-full block">
-      <defs>
-        <linearGradient id="wave-fill-light" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#1E2A44" stop-opacity="0" />
-          <stop offset="55%" stop-color="#1E2A44" stop-opacity="0.05" />
-          <stop offset="100%" stop-color="#1E2A44" stop-opacity="0.10" />
-        </linearGradient>
-        <linearGradient id="wave-stroke-light" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#1E2A44" stop-opacity="0" />
-          <stop offset="50%" stop-color="#1E2A44" stop-opacity="0.18" />
-          <stop offset="100%" stop-color="#1E2A44" stop-opacity="0" />
-        </linearGradient>
-        <filter id="wave-soft-light" x="-10%" y="-10%" width="120%" height="120%">
-          <feGaussianBlur stdDeviation="10" />
-        </filter>
-      </defs>
-      <g filter="url(#wave-soft-light)">
-        <path class="wave wave--a" fill="url(#wave-fill-light)" opacity="0.7"
-          d="M-1440,420 C-1080,360 -720,480 -360,420 C0,360 360,480 720,420 C1080,360 1440,480 1800,420 C2160,360 2520,480 2880,420 L2880,700 L-1440,700 Z"/>
-        <path class="wave wave--b" fill="url(#wave-fill-light)" opacity="0.5"
-          d="M-1440,500 C-1080,440 -720,560 -360,500 C0,440 360,560 720,500 C1080,440 1440,560 1800,500 C2160,440 2520,560 2880,500 L2880,700 L-1440,700 Z"/>
-      </g>
-      <g>
-        <path class="wave wave--stroke-1" fill="none" stroke="url(#wave-stroke-light)" stroke-width="1"
-          d="M-1440,380 C-1080,300 -720,460 -360,380 C0,300 360,460 720,380 C1080,300 1440,460 1800,380 C2160,300 2520,460 2880,380"/>
-        <path class="wave wave--stroke-2" fill="none" stroke="url(#wave-stroke-light)" stroke-width="1" opacity="0.5"
-          d="M-1440,460 C-1080,400 -720,530 -360,460 C0,400 360,530 720,460 C1080,400 1440,530 1800,460 C2160,400 2520,530 2880,460"/>
-      </g>
-    </svg>
-  )}
+<div class:list={["wave-bg absolute inset-0 overflow-hidden pointer-events-none z-0", className]} aria-hidden="true">
+  <svg viewBox="0 0 1440 600" preserveAspectRatio="none" role="presentation" class="w-full h-full block">
+    <defs>
+      <linearGradient id="hv-waveDeep" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color={tone === "on-dark" ? "#5A7BAA" : "#1E3A5F"} stop-opacity="0" />
+        <stop offset="100%" stop-color={tone === "on-dark" ? "#5A7BAA" : "#1E3A5F"} stop-opacity={tone === "on-dark" ? "0.45" : "0.20"} />
+      </linearGradient>
+      <linearGradient id="hv-sweepBright" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color={tone === "on-dark" ? "#E6EDF5" : "#1E3A5F"} stop-opacity="0" />
+        <stop offset="50%" stop-color={tone === "on-dark" ? "#E6EDF5" : "#1E3A5F"} stop-opacity={tone === "on-dark" ? "0.55" : "0.25"} />
+        <stop offset="100%" stop-color={tone === "on-dark" ? "#E6EDF5" : "#1E3A5F"} stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="hv-sweepSoft" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color={tone === "on-dark" ? "#B8C8DE" : "#1E3A5F"} stop-opacity="0" />
+        <stop offset="50%" stop-color={tone === "on-dark" ? "#B8C8DE" : "#1E3A5F"} stop-opacity={tone === "on-dark" ? "0.35" : "0.15"} />
+        <stop offset="100%" stop-color={tone === "on-dark" ? "#B8C8DE" : "#1E3A5F"} stop-opacity="0" />
+      </linearGradient>
+      <filter id="hv-waveSoft" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="18" />
+      </filter>
+      <filter id="hv-sweepGlow" x="-10%" y="-10%" width="120%" height="120%">
+        <feGaussianBlur stdDeviation="2.5" />
+      </filter>
+    </defs>
+    <g filter="url(#hv-waveSoft)">
+      <path
+        class="wave wave--a"
+        d="M-1440,340 C-1080,300 -720,380 -360,340 C0,300 360,380 720,340 C1080,300 1440,380 1800,340 C2160,300 2520,380 2880,340 L2880,600 L-1440,600 Z"
+        fill="url(#hv-waveDeep)"
+        opacity="0.85"
+      />
+      <path
+        class="wave wave--b"
+        d="M-1440,420 C-1080,380 -720,460 -360,420 C0,380 360,460 720,420 C1080,380 1440,460 1800,420 C2160,380 2520,460 2880,420 L2880,600 L-1440,600 Z"
+        fill="url(#hv-waveDeep)"
+        opacity="0.55"
+      />
+    </g>
+    <g filter="url(#hv-sweepGlow)">
+      <path
+        class="wave wave--sweep"
+        d="M-1440,330 Q-720,210 0,300 T1440,290 T2880,310"
+        fill="none"
+        stroke="url(#hv-sweepBright)"
+        stroke-width="1.6"
+        stroke-linecap="round"
+      />
+      <path
+        class="wave wave--sweep-2"
+        d="M-1440,390 Q-720,290 0,370 T1440,360 T2880,380"
+        fill="none"
+        stroke="url(#hv-sweepSoft)"
+        stroke-width="1.2"
+        stroke-linecap="round"
+      />
+    </g>
+  </svg>
 </div>
 
 <style>
@@ -121,15 +81,10 @@ const { tone = "on-dark", class: className = "" } = Astro.props;
     transform-origin: 0 0;
     will-change: transform;
   }
-  /* Fill layers, slower so the atmosphere reads quiet */
-  .wave--a { animation-duration: 32s; }
-  .wave--b { animation-duration: 48s; animation-direction: reverse; }
-  .wave--c { animation-duration: 64s; }
-  /* Stroke layers, slightly faster so the arcs feel alive */
-  .wave--stroke-1 { animation-duration: 36s; }
-  .wave--stroke-2 { animation-duration: 52s; animation-direction: reverse; }
-  .wave--stroke-3 { animation-duration: 70s; }
-
+  .wave--a       { animation-duration: 30s; }
+  .wave--b       { animation-duration: 46s; animation-direction: reverse; }
+  .wave--sweep   { animation-duration: 22s; }
+  .wave--sweep-2 { animation-duration: 38s; animation-direction: reverse; }
   @keyframes wave-flow {
     0%   { transform: translate3d(0, 0, 0); }
     100% { transform: translate3d(-720px, 0, 0); }
