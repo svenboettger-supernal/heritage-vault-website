@@ -13,14 +13,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @property registration so the .btn-glow conic-gradient angle can animate
-   smoothly. Must live at the top level (not inside @layer). */
-@property --btn-glow-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
 /* ---------- Heritage Vault brand tokens (direct port from heritage-brand reference repo) ---------- */
 :root {
   /* surfaces — cool near-white default, blue undertones (matches heritage-brand) */
@@ -244,97 +236,6 @@
   }
   .on-dark .eyebrow {
     color: hsl(35 26% 64%);
-  }
-
-  /* ===== Animated glossy stroke (.btn-glow) =====
-     Three layered effects:
-       1. ::before — rotating conic highlight (the "comet" sweep around the rim)
-       2. ::after  — soft inner glow that fades up behind the sweep head
-       3. host box-shadow — outer halo that breathes in/out on its own cadence
-
-     The @property declaration lets us animate the conic `from` angle directly
-     (Chromium 85+, Safari 16.4+, Firefox 128+). Browsers without @property
-     degrade to a static halo. */
-  .btn-glow {
-    position: relative;
-    isolation: isolate;
-    /* host carries the breathing outer halo */
-    animation: btn-glow-halo 4.8s ease-in-out infinite;
-    /* baseline shadow so initial paint already has presence */
-    box-shadow:
-      0 0 22px -2px hsl(214 95% 70% / 0.28),
-      0 0 8px -1px hsl(214 100% 88% / 0.35);
-  }
-  /* rotating bright comet around the rim */
-  .btn-glow::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 2px;
-    background: conic-gradient(
-      from var(--btn-glow-angle, 0deg),
-      transparent 0deg,
-      hsl(214 85% 70% / 0.0) 160deg,
-      hsl(214 90% 78% / 0.55) 215deg,
-      hsl(214 100% 88%) 255deg,
-      hsl(0 0% 100%) 280deg,
-      hsl(214 100% 88%) 305deg,
-      hsl(214 90% 78% / 0.55) 345deg,
-      transparent 360deg
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-            mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    pointer-events: none;
-    z-index: 1;
-    animation: btn-glow-rotate 3.6s linear infinite;
-    filter: drop-shadow(0 0 4px hsl(214 100% 85% / 0.55));
-  }
-  /* soft halo that travels with the comet head — drawn just outside the rim */
-  .btn-glow::after {
-    content: "";
-    position: absolute;
-    inset: -8px;
-    border-radius: inherit;
-    pointer-events: none;
-    z-index: 0;
-    background: conic-gradient(
-      from var(--btn-glow-angle, 0deg),
-      transparent 0deg,
-      transparent 230deg,
-      hsl(214 95% 80% / 0.35) 280deg,
-      transparent 330deg,
-      transparent 360deg
-    );
-    filter: blur(10px);
-    opacity: 0.9;
-    animation: btn-glow-rotate 3.6s linear infinite;
-  }
-  @keyframes btn-glow-rotate {
-    to { --btn-glow-angle: 360deg; }
-  }
-  @keyframes btn-glow-halo {
-    0%, 100% {
-      box-shadow:
-        0 0 18px -2px hsl(214 95% 70% / 0.22),
-        0 0 6px -2px hsl(214 100% 88% / 0.32);
-    }
-    50% {
-      box-shadow:
-        0 0 36px 0 hsl(214 95% 72% / 0.48),
-        0 0 12px -2px hsl(214 100% 90% / 0.6);
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .btn-glow { animation: none; box-shadow: 0 0 14px -2px hsl(214 95% 70% / 0.25); }
-    .btn-glow::before,
-    .btn-glow::after { animation: none; opacity: 0; }
   }
 
   /* Card surface */
