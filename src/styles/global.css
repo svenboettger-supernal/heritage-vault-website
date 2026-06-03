@@ -12,28 +12,29 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---------- Heritage Vault brand tokens (HSL components only) ---------- */
+/* ---------- Heritage Vault brand tokens (direct port from heritage-brand reference repo) ---------- */
 :root {
-  /* surfaces */
+  /* surfaces — cool near-white default, blue undertones (matches heritage-brand) */
   --surface-page: 214 47% 97%;       /* #F5F8FC — cool near-white, default page */
-  --surface-card: 0 0% 100%;         /* #FFFFFF — cards on the page */
-  --surface-muted: 214 30% 95%;      /* cool subtle blue-gray secondary surface (was ivory) */
-  --surface-cream: 44 36% 93%;       /* #F4F0E6 — ivory pill / button surfaces only, never section background */
-  --surface-navy: 220 38% 19%;       /* #1E2A44 — nav, contrast panel */
-  --surface-navy-card: 220 35% 22%;  /* card inside navy panel */
-  --surface-dark: 220 44% 11%;       /* #0F1626 — deepest hero panel */
+  --surface-card: 0 0% 100%;         /* #FFFFFF — true white card / table */
+  --surface-muted: 214 51% 94%;      /* #E8EEF6 — tinted blue panel (was warm ivory; brand demo "surface-2") */
+  --surface-deep: 214 41% 90%;       /* #DDE6F1 — deeper blue tint (brand demo "surface-3") */
+  --surface-navy: 215 57% 14%;       /* #0F1E36 — the brand demo "navy" */
+  --surface-navy-card: 215 50% 18%;  /* card sitting inside navy panel */
+  --surface-dark: 218 60% 9%;        /* #0A1628 — brand demo "navy-deep" */
 
   /* text */
   --text-ink: 218 27% 14%;           /* #1B2230 — body on ivory */
-  --text-muted: 220 9% 47%;          /* #6B7280 — metadata */
+  --text-muted: 220 11% 41%;         /* #5C6573 — metadata (brand demo "muted") */
   --text-placeholder: 220 9% 60%;
-  --text-on-dark: 44 36% 93%;        /* #F4F0E6 — body on navy, warm cream */
-  --text-muted-on-dark: 220 9% 67%;
+  --text-on-dark: 0 0% 100%;         /* #FFFFFF — pure white on navy for crispness (brand demo "on-dark") */
+  --text-muted-on-dark: 218 21% 75%; /* #B0BCD0 — brand demo "on-dark-muted" */
 
   /* structural */
   --bronze: 35 26% 43%;              /* #8C7351 — 1px hairlines only, never a fill */
-  --state-blue: 214 50% 34%;         /* #2C5282 — focus / active / info ONLY */
-  --rule: 38 22% 88%;                /* #E2DCD0 — warm hairline on ivory */
+  --state-blue: 214 50% 34%;         /* #2C5282 — focus / active / info ONLY (brand demo "state") */
+  --rule: 214 32% 91%;               /* #E1E7EF — cool gray-blue hairline (brand demo "rule") */
+  --rule-soft: 214 47% 95%;          /* #EEF2F8 — softer hairline */
   --rule-dark: 218 27% 28%;          /* hairline on navy */
 
   /* status (app mode only) */
@@ -141,14 +142,14 @@
   }
 
   /* Anchor defaults — navy on ivory, hairline-underline.
-     Exclude buttons (any anchor carrying .btn or a bg-* class) so Button styles win. */
-  a:not(.btn):not([class*="bg-"]):not(.no-underline) {
+     Exclude any anchor carrying a "btn" class fragment, a bg-* class, or no-underline. */
+  a:not([class*="btn"]):not([class*="bg-"]):not(.no-underline) {
     color: hsl(var(--surface-navy));
     text-decoration: none;
     border-bottom: 1px solid hsl(var(--rule));
     transition: border-color 200ms ease-out, color 200ms ease-out;
   }
-  a:not(.btn):not([class*="bg-"]):not(.no-underline):hover {
+  a:not([class*="btn"]):not([class*="bg-"]):not(.no-underline):hover {
     border-bottom-color: hsl(var(--surface-navy));
   }
   /* Logo lockups never carry an underline (image-only anchors). */
@@ -160,14 +161,13 @@
   .on-dark {
     color: hsl(var(--text-on-dark));
   }
-  /* Body links inside .on-dark surfaces: cream text + dark-rule underline.
-     Exclude buttons (any anchor carrying a bg-* class or .btn marker) so Button's own
-     variant colors are not overridden by this rule (cream bg + cream text = invisible). */
-  .on-dark a:not(.btn):not([class*="bg-"]) {
+  /* Body links inside .on-dark surfaces: pure-white text + dark-rule underline.
+     Exclude any anchor carrying a "btn" class fragment or a bg-* class so Button styles win. */
+  .on-dark a:not([class*="btn"]):not([class*="bg-"]) {
     color: hsl(var(--text-on-dark));
     border-bottom-color: hsl(var(--rule-dark));
   }
-  .on-dark a:not(.btn):not([class*="bg-"]):hover {
+  .on-dark a:not([class*="btn"]):not([class*="bg-"]):hover {
     border-bottom-color: hsl(var(--text-on-dark));
   }
 }

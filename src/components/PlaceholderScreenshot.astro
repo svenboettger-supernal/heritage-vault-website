@@ -79,10 +79,6 @@ const aspectClass: Record<NonNullable<Props["aspect"]>, string> = {
     </div>
   </div>
 
-  {/* Caption */}
-  <figcaption class="absolute bottom-3 left-4 right-4 flex items-end justify-between">
-    <span class="eyebrow text-[10px]">{label}</span>
-    {caption && <span class="text-[11px] text-ink-muted truncate ml-3">{caption}</span>}
-  </figcaption>
-  {/* placeholder: production screenshot from live Heritage Vault platform per brief §11.3 */}
+  {/* placeholder: production screenshot from live Heritage Vault platform per brief §11.3.
+       The browser-chrome URL above already identifies the surface, so no figcaption is needed. */}
 </figure>
